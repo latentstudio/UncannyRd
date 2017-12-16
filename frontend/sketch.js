@@ -41,10 +41,17 @@ function guid() {
 
 var imageArray;
 
+
 var w = 2048;
 var h = 1024;
 var img;
+
+function preload() {
+  img = loadImage("template.png");
+
+}
 function setup() {
+  pixelDensity(1);
   createCanvas(w, h);
   var bufSize = w * h;
   console.log(bufSize);
@@ -52,6 +59,8 @@ function setup() {
   imageArray = new Uint8Array(buffer);
   background(0);
   drawUI();
+      copy(img, 0, 0, w, h, 0, 0, w, h);
+
 }
 
 
@@ -59,18 +68,53 @@ function color2css(color) {
   return "rgb(" + color.join(",") + ")";
 }
 
+// classes = {
+//     0: [0, 0, 0], # unlabeled
+//     1: [255, 0, 104], # ego vehicle
+//     7: [128, 64, 127], # road
+//     8: [243, 36, 232], # sidewalk
+//     9: [250, 165, 165], # parking
+//     11: [70, 70, 70], # building
+//     13: [189, 153, 153], # fence
+//     17: [153, 153, 153], # pole
+//     19: [220, 220, 0], # traffic light
+//     20: [235, 150, 9],  # traffic sign
+//     21: [106, 142, 34], # vegetation
+//     23: [70, 130, 180], # sky
+//     24: [255, 0, 0],  # person
+//     25: [255, 129, 129],  # rider
+//     26: [0, 0, 142], # car
+//     32: [246, 210, 255],  # motorcycle
+//     33: [125, 8, 33], # bicycle
+// }
+
 var classes = [
-  // { color: [255, 0, 0], label: "person", id: 24, colorStr: '255,0,0'},
-  { color: [255, 0, 0], label: "person", id: 24, colorStr: '255,0,0'},
-  { color: [128, 64, 127], label: "road", id: 7, colorStr: '128,64,127'},
-  { color: [0, 0, 142], label: "car", id: 26, colorStr: '0,0,142' },
-  { color: [70, 130, 180], label: "sky", id: 23, colorStr: '70,130,180' },
-  { color: [70, 70, 70], label: "building", id: 11, colorStr: '70,70,70' },
-  { color: [153, 153, 153], label: "pole", id: 17, colorStr: '153,153,153' },
-  { color: [106, 142, 34], label: "vegetation", id: 21, colorStr: '106,142,34' },
-  { color: [220, 220, 0], label: "traffic sign", id: 19, colorStr: '220,220,0' },
-  { color: [119, 11, 32], label: "bicycle", id: 33, colorStr: '119,11,32' }
+  { color: [0, 0, 0], label: "unlabeled", id: 0 },
+  { color: [255, 0, 104], label: "ego vehicle", id: 1 },
+  { color: [28, 255, 215], label: "rectification border", id: 2 },
+  { color:  [185, 249, 72], label: "out of roi", id: 3 },
+  { color: [255, 255, 255], label: "static", id: 4 },
+  { color: [128, 64, 127], label: "road", id: 7 },
+  { color: [243, 36, 232], label: "sidewalk", id: 8 },
+  { color: [250, 165, 165], label: "parking", id: 9 },
+  { color: [70, 70, 70], label: "building", id: 11 },
+  { color: [189, 153, 153], label: "fence", id: 13 },
+  { color: [153, 153, 153], label: "pole", id: 17 },
+  { color: [220, 220, 0], label: "traffic light", id: 19 },
+  { color: [235, 150, 9], label: "traffic sign", id: 20 },
+  { color: [106, 142, 34], label: "vegetation", id: 21 },
+  { color: [70, 130, 180], label: "sky", id: 23 },
+  { color: [255, 0, 0], label: "person", id: 24 },
+  { color: [255, 129, 129], label: "rider", id: 25 },
+  { color: [0, 0, 142], label: "car", id: 26 },
+  { color: [246, 210, 255], label: "motorcycle", id: 32 },
+  { color: [125, 8, 33], label: "bicycle", id: 33 }
 ];
+
+for (var i = 0; i < classes.length; i++) {
+  var cls = classes[i];
+  cls.colorStr = cls.color.toString();
+}
 
 var currentColor = classes[0].color;
 var currentId = classes[0].id;
@@ -97,6 +141,12 @@ function drawUI() {
   submitButton.elt.style.background = "black";
   submitButton.mousePressed(submitRequest);
   container.child(submitButton);
+
+  var saveButton = createButton("save");
+  saveButton.elt.style.background = "blue";
+  saveButton.mousePressed(saveToDisk);
+  container.child(saveButton);
+  
 }
 
 function buttonPressed() {
@@ -110,11 +160,14 @@ function buttonPressed() {
 }
 
 function draw() {
+  // image(img, 0, 0, w, h);
+
   fill(currentColor);
   noStroke();
 
   if (mouseIsPressed) {
     rect(mouseX - 10, mouseY - 10, 20, 20);
+    // saveToArray ();
   }
 }
 
@@ -135,27 +188,71 @@ function mouseMoved() {}
 
 function submitRequest() {
   const requestId = guid();
+  var t1 = Date.now();
 
-  var ref = firebase
-    .storage()
-    .ref()
-    .child(requestId + ".bin");
-    saveToArray();
-    console.log(imageArray);
-    console.log(requestId);
-        var blob = new Blob([imageArray], {type: "octet/stream"});
+  saveToArray();
+          // var t2 = Date.now();
+   var blob = new Blob([imageArray], {type: "octet/stream"});
     //   var metadata = { contentType: "image/jpeg" };
-      ref.put(blob).then(function(snapshot) {
-        // submit the request
-        var requestRef = requestsRef.child(requestId);
-        var resultRef = resultsRef.child(requestId);
+      // var t2 = Date.now();
+      // console.log('saving to array', t2-t1);
+  // var ref = firebase
+  //   .storage()
+  //   .ref()
+  //   .child(requestId + ".bin");
 
-        resultRef.on("value", function(snapshot) {
-          const val = snapshot.val();
-          if (val !== null) {
-            console.log(val);
-          }
-        });
-        requestRef.set(snapshot.downloadURL);
-      });
+  //     ref.put(blob).then(function(snapshot) {
+  //       var t3 = Date.now();
+  //       console.log('upload', t3 - t2);
+
+  //       // submit the request
+  //       var requestRef = requestsRef.child(requestId);
+  //       var resultRef = resultsRef.child(requestId);
+
+  //       resultRef.on("value", function(snapshot) {
+  //         var t4 = Date.now();
+          
+  //         const val = snapshot.val();
+  //         if (val !== null) {
+  //           console.log("processing", t4 - t3);
+  //           console.log("total", t4 - t1);
+  //           console.log(val);
+  //         }
+  //       });
+  //       requestRef.set(snapshot.downloadURL);
+  //     });
+
+  var fd = new FormData();
+  fd.append("file", blob);
+  $.ajax({
+    type: "POST",
+    url: "http://localhost:8888/infer",
+    data: fd,
+    processData: false,
+    contentType: false
+  }).done(function(data) {
+    console.log('done', Date.now() - t1);
+    var img = document.createElement("img");
+    // img.src = new Blob([data]);
+    img.src = "data:image/jpeg;base64," + data;
+    document.body.appendChild(img);
+
+    // console.log(data);
+  });
+
+}
+
+function saveToDisk () {
+  saveToArray();
+  var blob = new Blob([imageArray], { type: "octet/stream" });
+  // saveAs(blob, "img.bin");
+  var url = window.URL.createObjectURL(blob);
+ var a = document.createElement("a");
+ document.body.appendChild(a);
+     a.style = "display: none";
+             a.href = url;
+             a.download = "img.bin";
+             a.click();
+             window.URL.revokeObjectURL(url);
+
 }
