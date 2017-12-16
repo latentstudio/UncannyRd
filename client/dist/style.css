@@ -1,0 +1,141 @@
+*{
+  margin: 0px;
+  padding: 0px;
+  font-family: 'Roboto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
+}
+
+body{
+  background-image: url('images/demo.png');
+}
+
+p{
+  font-size: 10px;
+}
+
+header{
+  background: rgba(34,34,34,.8);
+  display: inline-block;
+  color:white;
+  padding: 4px;
+  width: 170px;
+}
+
+canvas{
+  position: absolute;
+  top: 0;
+  z-index: 5;
+}
+
+button{
+  margin: 2px;
+  font-size: 14px;
+  margin: 4px 0px;
+  display: block;
+  padding: 3px 5px;
+  border: none;
+  animation-duration: 2s;
+  float: right;
+  clear: both;
+  cursor: pointer;
+  box-shadow: 0 3px 3px 0 rgba(27, 27, 27, 0.95), 0 0px 0px 0 rgba(138, 138, 138, 0.11);
+}
+
+button:hover{
+  transform: scale(1.01);
+}
+
+#gui{
+  position: absolute;
+  z-index: 10;
+  right: 10px;
+  top: 20px;
+  text-align: right;
+}
+
+#back{
+  height: 100px;
+  display: inline-block;
+  border-right: 1px solid #777777ad;
+  padding: 5px;
+}
+
+#streetInfo{
+  display: inline-block;
+  vertical-align: top;
+  margin: 10px 0px 0px 10px;
+  position: relative;
+  height: 100px;
+}
+
+#arrow{
+  background-image: url('images/arrow.png');
+  background-size: cover;
+  width: 15px;
+  height: 15px;
+  margin: 40px 0px 0px 0px;
+}
+
+#streetName{
+  font-weight: bolder;
+  margin: 0px 0px 8px 0px;
+  font-size: 12px;
+  display: inline-block;
+}
+
+#date{
+  position: absolute;
+  bottom: 10px;
+}
+
+#place{
+  background-image: url('images/place.png');
+  background-size: cover;
+  width: 15px;
+  height: 20px;
+  display: inline-block;
+  position: relative;
+  top: 8px;
+  right: 0px;
+  margin: 0px 0px 0px 10px;
+}
+
+#navegation{
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+#navegation img{
+  width: 200px;
+  border: 2px solid black;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+#make{
+  position: absolute;
+  right: 10px;
+  bottom: 30px;
+  background: #56bb7c;
+  padding: 8px 15px;
+  z-index: 10;
+  cursor: pointer;
+  color: white;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+#make:hover{
+  transform: scale(1.02);
+}
+
+footer{
+  position: absolute;
+  bottom: 0px;
+  background: black;
+  color: #b7b7b7;
+  right: 0px;
+  padding: 0px 10px;
+}
