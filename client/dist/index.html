@@ -17,9 +17,9 @@
       <div id="arrow"></div>
     </div>
     <div id="streetInfo">
-      <p id="streetName">236 Bedford Ave</p>
+      <p id="streetName"></p>
       <div id="place"></div>
-      <p id="city">New York</p>
+      <p id="city"></p>
       <p id="date">December 2017</p>
     </div>
   </header>
@@ -28,8 +28,29 @@
   </div>
 
   <div id="gui">
+    <p id="brushSize">Brush Size</p>
+    <input type="range" min="1" max="100" value="30" class="slider" id="brushSizeSlider">
+    <div id="brushes"></div>
+    <div id="items"></div>
+    <div id="scenes"></div>
+    <img id="loader" src="images/loader.gif" />
+    <div id="make">Make</div>
   </div>
-  <div id="make">Make</div>
+
+  <div id="resultImg"></div>
+  <div id="compare" draggable="true">
+    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" viewBox="0 0 50 62.5" enable-background="new 0 0 30 30" xml:space="preserve">
+      <g>
+        <polygon fill="#000000" points="1.13,25 13,36.869 13,13.13  " />
+        <polygon fill="#000000" points="49.869,25 38,13.13 38,36.869  " />
+        <polygon fill="#000000" points="37.668,37.131 37.668,36.869 37.406,37.131  " />
+        <polygon fill="#000000" points="13.407,12.87 13.407,13.13 13.667,12.87  " />
+        <polygon fill="#000000" points="13.667,37.131 13.407,36.869 13.407,37.131  " />
+        <polygon fill="#000000" points="37.668,12.87 37.406,12.87 37.668,13.13  " />
+        <circle fill="#000000" cx="25.537" cy="25" r="3.916" />
+      </g>
+    </svg>
+  </div>
 
   <div id="navegation">
     <img src="images/position.png" alt="">

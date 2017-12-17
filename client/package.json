@@ -18,7 +18,11 @@
     "watchify": "3.9.0"
   },
   "dependencies": {
+    "@tweenjs/tween.js": "17.1.1",
+    "cocoen": "2.0.5",
+    "faker": "4.1.0",
     "firebase": "4.8.0",
+    "jquery": "3.2.1",
     "p5": "0.5.16"
   }
 }

@@ -191,42 +191,13 @@ function submitRequest() {
   var t1 = Date.now();
 
   saveToArray();
-          // var t2 = Date.now();
-   var blob = new Blob([imageArray], {type: "octet/stream"});
-    //   var metadata = { contentType: "image/jpeg" };
-      // var t2 = Date.now();
-      // console.log('saving to array', t2-t1);
-  // var ref = firebase
-  //   .storage()
-  //   .ref()
-  //   .child(requestId + ".bin");
-
-  //     ref.put(blob).then(function(snapshot) {
-  //       var t3 = Date.now();
-  //       console.log('upload', t3 - t2);
-
-  //       // submit the request
-  //       var requestRef = requestsRef.child(requestId);
-  //       var resultRef = resultsRef.child(requestId);
-
-  //       resultRef.on("value", function(snapshot) {
-  //         var t4 = Date.now();
-          
-  //         const val = snapshot.val();
-  //         if (val !== null) {
-  //           console.log("processing", t4 - t3);
-  //           console.log("total", t4 - t1);
-  //           console.log(val);
-  //         }
-  //       });
-  //       requestRef.set(snapshot.downloadURL);
-  //     });
+  var blob = new Blob([imageArray], {type: "octet/stream"});
 
   var fd = new FormData();
   fd.append("file", blob);
   $.ajax({
     type: "POST",
-    url: "http://localhost:8888/infer",
+    url: "http://49a89aa9.ngrok.io/infer",
     data: fd,
     processData: false,
     contentType: false
@@ -236,7 +207,6 @@ function submitRequest() {
     // img.src = new Blob([data]);
     img.src = "data:image/jpeg;base64," + data;
     document.body.appendChild(img);
-
     // console.log(data);
   });
 

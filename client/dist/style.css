@@ -8,7 +8,7 @@
 }
 
 body{
-  background-image: url('images/demo.png');
+  /* background-image: url('images/demo.png'); */
 }
 
 p{
@@ -20,7 +20,8 @@ header{
   display: inline-block;
   color:white;
   padding: 4px;
-  width: 170px;
+  z-index: 20;
+  position: absolute;
 }
 
 canvas{
@@ -32,13 +33,11 @@ canvas{
 button{
   margin: 2px;
   font-size: 14px;
-  margin: 4px 0px;
-  display: block;
+  margin: 4px 5px;
+  display: inline-block;
   padding: 3px 5px;
   border: none;
   animation-duration: 2s;
-  float: right;
-  clear: both;
   cursor: pointer;
   box-shadow: 0 3px 3px 0 rgba(27, 27, 27, 0.95), 0 0px 0px 0 rgba(138, 138, 138, 0.11);
 }
@@ -50,9 +49,13 @@ button:hover{
 #gui{
   position: absolute;
   z-index: 10;
-  right: 10px;
-  top: 20px;
+  right: 00px;
+  top: 0px;
+  padding: 12px;
+  background: #000000d6;
+  height: 100%;
   text-align: right;
+  max-width: 230px;
 }
 
 #back{
@@ -106,6 +109,7 @@ button:hover{
   position: absolute;
   bottom: 20px;
   left: 20px;
+  z-index: 20;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
@@ -117,18 +121,34 @@ button:hover{
 
 #make{
   position: absolute;
-  right: 10px;
-  bottom: 30px;
   background: #56bb7c;
-  padding: 8px 15px;
+  text-align: center;
+  padding: 10px 45px;
   z-index: 10;
   cursor: pointer;
   color: white;
+  bottom: 60px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  transform: translate(-50%, 0);
+  left: 50%;
+}
+
+#compare{
+  position: absolute;
+  z-index: 40;  
+  border-radius: 50%;
+  background: #ffffff;
+  text-align: center;
+  bottom: 50%;
+  left: -25px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
 }
 
 #make:hover{
-  transform: scale(1.02);
+
 }
 
 footer{
@@ -137,5 +157,85 @@ footer{
   background: black;
   color: #b7b7b7;
   right: 0px;
+  z-index: 30;
   padding: 0px 10px;
+}
+
+#brushSize{
+  display: block;
+}
+
+#brushSize{
+  color:white;
+  font-size: 13px;
+}
+
+.slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 15px;
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  margin: 0px 0px 15px 0px;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+.slider:hover {
+  opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  background: rgb(255, 255, 255);
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  background: rgb(255, 255, 255);
+  cursor: pointer;
+}
+
+#items{
+  margin: 20px 0px 0px 0px;
+}
+
+.item{
+  /* width: 24px; */
+  display: inline-block;
+  max-height: 73px;
+}
+
+#resultImg{
+  position: absolute;
+  z-index: 7;
+  background: url('images/result.jpg');
+  height: 100%;
+  width: 0px;
+}
+
+#loader{
+  position: absolute;
+  bottom: 70px;
+  z-index: 90;
+  width: 20px;
+  /* transform: translate(-50%, 0); */
+  left: 10%;
+  /* display: none; */
+}
+
+#scenes{
+  text-align: center;
+  cursor: pointer;
+}
+
+.scene{
+  width: 80px;
+  margin: 4px;
 }
