@@ -227,7 +227,7 @@ footer{
   width: 20px;
   /* transform: translate(-50%, 0); */
   left: 10%;
-  /* display: none; */
+  display: none;
 }
 
 #scenes{
