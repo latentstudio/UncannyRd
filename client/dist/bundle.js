@@ -153724,7 +153724,7 @@ var saveToArray = function saveToArray(w, h, classes) {
     for (var j = 0; j < classes.length; j++) {
       var c2 = classes[j].color;
       if (c[0] === c2[0] && c[1] === c2[1] && c[2] === c2[2]) {
-        arr[i / 4] = classes[j].id;
+        imageArray[i / 4] = classes[j].id;
         break;
       }
     }
