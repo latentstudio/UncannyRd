@@ -3,6 +3,8 @@ import io
 from PIL import Image
 from collections import OrderedDict
 from flask import *
+from flask_cors import CORS
+import numpy as np
 from options.test_options import TestOptions
 from data.data_loader import CreateDataLoader
 from models.models import create_model
@@ -18,13 +20,13 @@ opt.no_flip = True
 model = create_model(opt)
 
 app = Flask(__name__)
+CORS(app)
 
 
 @app.route('/infer', methods=['POST'])
 def infer():
-    file = request.files['file']
-    fn = secure_filename(file.filename)
-    label = Image.open(fn)
+    label = Image.fromarray(np.frombuffer(
+            request.files['file'].read(), dtype=np.uint8).reshape((1024, 2048)))
     params = get_params(opt, label.size)
     transform_label = get_transform(
         opt, params, method=Image.NEAREST, normalize=False
@@ -33,7 +35,9 @@ def infer():
     inst_tensor = transform_label(label)
     label_tensor = label_tensor.unsqueeze(0)
     inst_tensor = inst_tensor.unsqueeze(0)
+    print(label_tensor.size(), inst_tensor.size())
     generated = model.inference(label_tensor, inst_tensor)
+    print('Done')
     im = util.tensor2im(generated.data[0])
     im_pil = Image.fromarray(im)
     buffer = io.BytesIO()
@@ -42,4 +46,5 @@ def infer():
 
 
 if __name__ == '__main__':
-    app.run()
+    app.debug = True
+    app.run(port=8888)
