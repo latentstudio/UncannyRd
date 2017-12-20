@@ -19,10 +19,12 @@ const saveToArray = (w, h, classes) => {
   const imageArray = new Uint8Array(buffer);
 
   for (let i = 0; i < imgData.data.length; i += 4) {
-    const c = [imgData.data[i], imgData.data[i + 1], imgData.data[i + 2]].toString();
+    const c = [imgData.data[i], imgData.data[i + 1], imgData.data[i + 2]];
     for (let j = 0; j < classes.length; j++) {
-      if (c === classes[j].color.join(',')) {
-        imageArray[i / 4] = classes[j].id;
+      var c2 = classes[j].color;
+      if (c[0] === c2[0] && c[1] === c2[1] && c[2] === c2[2]) {
+        arr[i / 4] = classes[j].id;
+        break;
       }
     }
   }

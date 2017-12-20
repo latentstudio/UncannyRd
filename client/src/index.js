@@ -71,6 +71,11 @@ window.onload = () => {
     items.appendChild(item);
   });
 
+  compare.addEventListener('mousedown', (e) => {
+    comparing = true;
+    window.sliderAnim.stop();
+  });
+
   // Compare the images
   compare.addEventListener('dragstart', (e) => {
     comparing = true;
@@ -153,6 +158,10 @@ const sketch = (p) => {
     setTimeout(() => {
       uploadManager.submitRequest(width, height, resultImg, loader);
     }, 100);
+  });
+
+  document.body.addEventListener('mouseup', () => {
+    comparing = false;
   });
 }
 

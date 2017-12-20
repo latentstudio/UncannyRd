@@ -18,22 +18,21 @@ const submitRequest = (w, h, resultImg, loader) => {
   fd.append("file", blob);
   $.ajax({
     type: "POST",
-    url: "http://49a89aa9.ngrok.io/infer",
+    url: "http://localhost:8888/infer",
     data: fd,
     processData: false,
     contentType: false
   }).done(data => {
-    loader.style.display = 'none';
-    console.log('done', Date.now() - t1);
+    loader.style.display = "none";
     let pos = { left: 0 };
-    new TWEEN.Tween(pos)
-    .to({left: 70}, 10000)
-    .easing(TWEEN.Easing.Exponential.Out)
-    .onUpdate(() => {
-      compare.style.left = (pos.left - 2) + '%';
-      resultImg.style.width = pos.left + '%';
-    })
-    .start()
+    window.sliderAnim = new TWEEN.Tween(pos)
+      .to({ left: 70 }, 10000)
+      .easing(TWEEN.Easing.Exponential.Out)
+      .onUpdate(() => {
+        compare.style.left = pos.left - 2 + "%";
+        resultImg.style.width = pos.left + "%";
+      })
+      .start();
     resultImg.style.background = `url(data:image/jpeg;base64,${data})`;
   });
 };
