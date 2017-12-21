@@ -1,5 +1,6 @@
 import base64
 import io
+import zlib
 from PIL import Image
 from collections import OrderedDict
 from flask import *
@@ -16,6 +17,10 @@ opt.nThreads = 1
 opt.batchSize = 1
 opt.serial_batches = True
 opt.no_flip = True
+opt.name = 'label2city_1024p'
+opt.netG = 'local'
+opt.ngf = 32
+opt.resize_or_crop = 'none'
 
 model = create_model(opt)
 
@@ -25,8 +30,8 @@ CORS(app)
 
 @app.route('/infer', methods=['POST'])
 def infer():
-    label = Image.fromarray(np.frombuffer(
-            request.files['file'].read(), dtype=np.uint8).reshape((1024, 2048)))
+    buf = zlib.decompress(request.files['file'].read())
+    label = Image.fromarray(np.frombuffer(buf, dtype=np.uint8).reshape((1024, 2048)))
     params = get_params(opt, label.size)
     transform_label = get_transform(
         opt, params, method=Image.NEAREST, normalize=False
@@ -35,9 +40,7 @@ def infer():
     inst_tensor = transform_label(label)
     label_tensor = label_tensor.unsqueeze(0)
     inst_tensor = inst_tensor.unsqueeze(0)
-    print(label_tensor.size(), inst_tensor.size())
     generated = model.inference(label_tensor, inst_tensor)
-    print('Done')
     im = util.tensor2im(generated.data[0])
     im_pil = Image.fromarray(im)
     buffer = io.BytesIO()
@@ -46,5 +49,4 @@ def infer():
 
 
 if __name__ == '__main__':
-    app.debug = True
-    app.run(port=8888)
+    app.run(host='0.0.0.0', port=8888)

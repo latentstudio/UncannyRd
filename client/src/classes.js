@@ -1,7 +1,7 @@
 // Classes by color
 
 const classes = [
-  { color: [0, 0, 0], label: "unlabeled", id: 0, textColor: [255,255,255] },
+  { color: [0, 0, 0], label: "unlabeled", id: 0, textColor: [255,255,255], visible: false },
   { color: [255, 0, 104], label: "ego vehicle", id: 1, textColor: [255,255,255] },
   { color: [28, 255, 215], label: "rectification border", id: 2, textColor: [0,0,0] },
   { color:  [185, 249, 72], label: "out of roi", id: 3, textColor: [0,0,0] },
