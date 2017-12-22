@@ -19,11 +19,6 @@ class BurgerMenu extends Component {
     super();
   }
 
-  handleColorChange = e => {
-    console.log(e.target.style.background);
-    this.props.changeColor('test');
-  }
-
   render() {
     const { isMenuActive, updateStatus, brushSize, showLoader } = this.props;
     let makeBtnStyle = {
@@ -55,9 +50,9 @@ class BurgerMenu extends Component {
                 background: color2css(c.color),
                 color: color2css(c.textColor)
               }
-              return <button 
-                onClick={this.handleColorChange} 
-                key={c.label}
+              return <button
+                onClick={() => this.props.changeColor(c.color)} 
+                key={c.color}
                 style={style}
                 className={"BrushColor"}
                 >

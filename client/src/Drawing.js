@@ -137,7 +137,7 @@ class Drawing extends Component {
         <NavigationWidget />
         <Menu
           brushSize={brushSize}
-          changeColor={(c) => console.log(c)}
+          changeColor={color => this.setState({currentColor: color})}
           isMenuActive={isMenuActive}
           showLoader={showLoader}
           updateBrushSize={s => this.setState({brushSize: s })}
