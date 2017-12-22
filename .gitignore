@@ -1,1 +1,4 @@
 client/node_modules
+server/checkpoints
+videos/
+client_js/
