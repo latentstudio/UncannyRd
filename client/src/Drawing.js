@@ -102,8 +102,12 @@ class Drawing extends Component {
     //     posLeft: 0,
     //     shouldMakeNewImage: false,
     //     showLoader: false,
-    //     resultImg: `url(data:image/jpeg;base64,${resultImg})`
-    //     sliderAnimation: new TWEEN.Tween(pos).to({ left: 70 }, 10000).easing(TWEEN.Easing.Exponential.Out).onUpdate(() => { this.setState({ posLeft: pos.left }) }).start();
+    //     resultImg: `url(data:image/jpeg;base64,${resultImg})`,
+    //     sliderAnimation: new TWEEN.Tween(pos).to({ left: 70 }, 10000).easing(TWEEN.Easing.Exponential.Out).onUpdate(() => { 
+    //       this.setState({
+    //         posLeftPercentage: pos.left,
+    //         posLeftPx: (window.innerWidth/100)*pos.left,
+    //       }) }).start()
     //   }, () => clearSketch());
     // });
   }
@@ -140,10 +144,10 @@ class Drawing extends Component {
         <Draggable
           axis="x"
           handle=".Handle"
-          grid={[0, window.innerWidth - 40]}
-          // position={{x: this.state.posLeftPx, y: 330}}
+          // grid={[0, window.innerWidth - 40]}
+          position={{x: this.state.posLeftPx, y: 330}}
           defaultPosition={{x: this.state.posLeftPx, y: 330}}
-          onDrag={e => this.setState({posLeftPx: e.clientX})}
+          onDrag={e => this.setState({posLeftPx: e.clientX, posLeftPercentage: (e.clientX/window.innerWidth)*100})}
           onStart={() => this.setState({isComparing: true})}
           onStop={() => this.setState({isComparing: false})}
           defaultClassName="CompareIcon">

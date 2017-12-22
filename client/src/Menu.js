@@ -24,7 +24,16 @@ class BurgerMenu extends Component {
   }
 
   render() {
-    const { isMenuActive, updateStatus, brushSize } = this.props;
+    const { isMenuActive, updateStatus, brushSize, showLoader } = this.props;
+    let makeBtnStyle = {
+      background: ''
+    }
+
+    if(showLoader) {
+      makeBtnStyle = {
+      background: ''
+    }
+    }
 
     let burgerIcon = <MdBrush />
     if (isMenuActive) {
@@ -80,7 +89,7 @@ class BurgerMenu extends Component {
             onDragEnd={(e) => this.props.newObject(e.clientX, e.clientY, e.target)}
           />
           <div className="ActionableBtns">
-            {this.props.showLoader ? <img src={loader} alt="loader" srcSet={loader} className="Loader"/>: null}
+            {showLoader ? <img src={loader} alt="loader" srcSet={loader} className="Loader"/>: null}
             <button className="MakeBtn Btn" onClick={(e) => this.props.make(e)}>MAKE <span>RD</span></button>
             <button className="ClearBtn Btn" onClick={() => clearSketch()}>CLEAR ALL</button>
           </div>
