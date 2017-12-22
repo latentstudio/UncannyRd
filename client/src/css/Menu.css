@@ -160,3 +160,9 @@ button:focus {outline:0;}
   position: relative;
   vertical-align: middle;
 }
+
+.Loader{
+  width: 25px;
+  display: block;
+  margin: 10px auto;
+}

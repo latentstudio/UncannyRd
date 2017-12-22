@@ -22,6 +22,7 @@ let preloadObjects = [];
 let updateMakeStatus;
 let shouldMakeNewImage = false;
 let isDraggingAnObject;
+let clearSketch; 
 
 let currentColor = classes[0].color;
 let currentId = classes[0].id;
@@ -63,7 +64,6 @@ const sketch = p => {
 
     p.fill(currentColor[0], currentColor[1], currentColor[2]);
     p.noStroke();
-
     // User draw
     if (p.mouseIsPressed && !isComparing && !isDraggingAnObject) {
       if (isMenuActive) {
@@ -73,24 +73,25 @@ const sketch = p => {
       } else {
         p.ellipse(p.mouseX, p.mouseY, parseInt(brushSize));
       } 
-      
     }
 
     // When shouldMakeNewImage is true, copy all the <img> to the canvas
     if (shouldMakeNewImage) {
       objects.forEach(object => {
         const index = preloadObjectsNames.findIndex(name => {return name === object.name });
-        p.image(preloadObjects[index], object.x, object.y);
+        p.image(preloadObjects[index], object.x, object.y-20, object.width, object.height);
       });
       updateMakeStatus();
     }
+  }
 
-    // // Place an item
-    // if (placeItem) {
-    //   p.image(pItems[placeImg], p.mouseX - 20, p.mouseY - 40);
-    //   placeItem = false;
-    // }
+  clearSketch = () => {
+    p.clear();
+    p.copy(startImg, 0, 0, width, height, 0, 0, width, height);
   }
 };
 
-export default sketch;
+export {
+  sketch,
+  clearSketch
+}

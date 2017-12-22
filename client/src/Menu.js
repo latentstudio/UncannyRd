@@ -6,7 +6,9 @@ import React, { Component } from 'react';
 import { slide as Menu } from 'react-burger-menu'
 import MdBrush from 'react-icons/lib/md/brush';
 
+import { clearSketch } from './Sketch';
 import { classes } from './classes';
+import loader from './img/loader.gif';
 import car from './img/items/car01.png';
 import { color2css } from './utils';
 
@@ -20,7 +22,6 @@ class BurgerMenu extends Component {
   handleColorChange = e => {
     console.log(e);
   }
-
 
   render() {
     const { isMenuActive, updateStatus, brushSize } = this.props;
@@ -79,8 +80,9 @@ class BurgerMenu extends Component {
             onDragEnd={(e) => this.props.newObject(e.clientX, e.clientY, e.target)}
           />
           <div className="ActionableBtns">
+            {this.props.showLoader ? <img src={loader} alt="loader" srcSet={loader} className="Loader"/>: null}
             <button className="MakeBtn Btn" onClick={(e) => this.props.make(e)}>MAKE <span>RD</span></button>
-            <button className="ClearBtn Btn">CLEAR ALL</button>
+            <button className="ClearBtn Btn" onClick={() => clearSketch()}>CLEAR ALL</button>
           </div>
 
        </Menu>

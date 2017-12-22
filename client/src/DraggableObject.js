@@ -34,7 +34,7 @@ class DraggableObject extends Component {
       this.setState({
         ...state
       });
-      this.props.update(this.props.values.key, this.state)
+      this.props.update(this.props.values.key, this.state);
     }
   }
 
@@ -75,10 +75,13 @@ class DraggableObject extends Component {
         size={{ width: width,  height:height }}
         position={{ x: x, y: y }}
         onDragStop={this.handleDrag}
+        onDrag={() => this.props.setDraggingOn()}
         onResize={this.handleResize}
       >
       <img
         onDoubleClick={this.handleClick}
+        onMouseOver={() => this.props.setDraggingOn()}
+        onMouseLeave={() => this.props.setDraggingOff()}
         draggable="false"
         src={src}
         alt=""

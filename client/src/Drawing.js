@@ -7,12 +7,15 @@ import P5Wrapper from 'react-p5-wrapper';
 import Draggable from 'react-draggable';
 import MdSwapHoriz from 'react-icons/lib/md/swap-horiz';
 import update from 'immutability-helper';
+import TWEEN from '@tweenjs/tween.js';
 
-import Sketch from './Sketch';
+import sendImage from './upload';
+import { sketch, clearSketch } from './Sketch';
 import DraggableObject from './DraggableObject';
 import Menu from './Menu';
 import NavigationWidget from './NavigationWidget';
 import { guid } from './utils'
+import startingResultImage from './img/result.jpg'
 
 import './css/Drawing.css';
 
@@ -21,13 +24,17 @@ class Drawing extends Component {
     super();
     this.state = {
       menuWidth: 300,
-      posLeft: 40,
+      posLeftPercentage: 10,
+      posLeftPx: (8.5/100)*window.innerWidth,
+      resultImg: startingResultImage,
       isMenuActive: true,
       isComparing: false,
       isDraggingAnObject: false,
       objects: [],
       shouldMakeNewImage: false,
-      brushSize: 20
+      brushSize: 20,
+      showLoader: false,
+      sliderAnimation: undefined
     }
   }
 
@@ -60,12 +67,61 @@ class Drawing extends Component {
     const newObjects = update(objects, {
         $splice: [[index, 1, updatedValue]]
     });
-    this.setState({objects: newObjects});
+    this.setState({
+      isDraggingAnObject: false,
+      objects: newObjects
+    });
+  }
+
+  makeNewImage = () => {
+    const { width, height } = this.props;
+    
+    this.setState({
+      showLoader: true,
+      shouldMakeNewImage: true
+    });
+
+    setTimeout(() => {
+      let pos = { left: 0 };
+      this.setState({
+        posLeftPercentage: 0,
+        posLeftPx: 0,
+        shouldMakeNewImage: false,
+        showLoader: false,
+        sliderAnimation: new TWEEN.Tween(pos).to({ left: 70 }, 10000).easing(TWEEN.Easing.Exponential.Out).onUpdate(() => { 
+          this.setState({
+            posLeftPercentage: pos.left,
+            posLeftPx: (window.innerWidth/100)*pos.left,
+          }) }).start()
+      }, () => clearSketch());
+    }, 2000);
+
+    // sendImage(width, height, resultImg => {
+    //   let pos = { left: 0 };
+    //   this.setState({
+    //     posLeft: 0,
+    //     shouldMakeNewImage: false,
+    //     showLoader: false,
+    //     resultImg: `url(data:image/jpeg;base64,${resultImg})`
+    //     sliderAnimation: new TWEEN.Tween(pos).to({ left: 70 }, 10000).easing(TWEEN.Easing.Exponential.Out).onUpdate(() => { this.setState({ posLeft: pos.left }) }).start();
+    //   }, () => clearSketch());
+    // });
   }
 
   render() {
-    const { posLeft, brushSize, isComparing, objects, menuWidth, isMenuActive, shouldMakeNewImage, isDraggingAnObject } = this.state;
     const { width, height } = this.props;
+    const {
+      posLeftPercentage,
+      posLeftPx,
+      brushSize,
+      isComparing,
+      objects,
+      menuWidth,
+      isMenuActive,
+      shouldMakeNewImage,
+      isDraggingAnObject,
+      showLoader
+    } = this.state;
 
     return (
       <div className="DrawingPage">
@@ -73,18 +129,21 @@ class Drawing extends Component {
         <Menu
           brushSize={brushSize}
           isMenuActive={isMenuActive}
+          showLoader={showLoader}
           updateBrushSize={s => this.setState({brushSize: s })}
           updateStatus={() => this.setState({isMenuActive: !this.state.isMenuActive})}
           newObject={this.handleNewDragObject}
-          make={() => this.setState({shouldMakeNewImage: true})}
+          make={this.makeNewImage}
           startDraggingObject={() => this.setState({isDraggingAnObject: true})}
         />
-        <div className="ResultImage" style={{width: `${posLeft}px`}} />
+        <div className="ResultImage" style={{width: `${posLeftPercentage}%`, background: `url(${this.state.resultImg})`}} />
         <Draggable
           axis="x"
           handle=".Handle"
-          defaultPosition={{x: 20, y: 330}}
-          onDrag={e => this.setState({posLeft: e.clientX})}
+          grid={[0, window.innerWidth - 40]}
+          // position={{x: this.state.posLeftPx, y: 330}}
+          defaultPosition={{x: this.state.posLeftPx, y: 330}}
+          onDrag={e => this.setState({posLeftPx: e.clientX})}
           onStart={() => this.setState({isComparing: true})}
           onStop={() => this.setState({isComparing: false})}
           defaultClassName="CompareIcon">
@@ -92,9 +151,17 @@ class Drawing extends Component {
             <MdSwapHoriz className="Handle"/>
           </div>
         </Draggable>
-        {this.state.objects.map((object, index) => { return <DraggableObject key={object.key} values={object} update={this.updateDraggableObject}/> })};
+        {this.state.objects.map((object, index) => { return (
+          <DraggableObject
+            key={object.key}
+            values={object}
+            update={this.updateDraggableObject}
+            setDraggingOn={() => this.setState({isDraggingAnObject: true})}
+            setDraggingOff={() => this.setState({isDraggingAnObject: false})}
+            />
+          )})};
         <P5Wrapper 
-          sketch={Sketch}
+          sketch={sketch}
           width={width}
           height={height}
           objects={objects}
