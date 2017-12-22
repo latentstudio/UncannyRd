@@ -1,0 +1,52 @@
+.NavigationWidget{
+  background: rgba(34,34,34,.8);
+  display: inline-block;
+  color:white;
+  padding: 4px;
+  z-index: 20;
+  position: absolute;
+}
+
+.Back{
+  height: 100px;
+  display: inline-block;
+  border-right: 1px solid #777777ad;
+  padding: 5px;
+}
+
+.Backarrow{
+  font-size: 23px;
+}
+
+.StreetInfo{
+  display: inline-block;
+  vertical-align: top;
+  margin: 10px 0px 0px 10px;
+  position: relative;
+  height: 100px;
+}
+
+.PlaceIcon{
+  margin: 0px 0px 0px 50px;
+}
+
+#streetName{
+  font-weight: bolder;
+  margin: 0px 0px 8px 0px;
+  font-size: 12px;
+  display: inline-block;
+}
+
+#date{
+  position: absolute;
+  bottom: 10px;
+  font-size: 10px;
+}
+
+#place{
+  display: inline-block;
+  position: relative;
+  top: 8px;
+  right: 0px;
+  margin: 0px 0px 0px 10px;
+}

@@ -1,0 +1,162 @@
+/* Position and sizing of burger button */
+.bm-burger-button {
+  position: absolute;
+  width: 36px;
+  height: 30px;
+  right: 15px;
+  top: 10px;
+  color: #ffffffb8;
+  background: #000000c0;
+  border-radius: 50%;
+  padding: 10px;
+  box-shadow: 0 10px 10px 0 rgba(10, 10, 10, 0.137), 0 10px 10px 0 rgba(0, 0, 0, 0.144);
+  transition-duration: 1s;
+  z-index: 4 !important;
+}
+
+.bm-burger-button:hover{
+  transform: scale(1.05);
+}
+
+/* Color/shape of burger icon bars */
+.bm-burger-bars {
+  background: #e4e4e4;
+}
+
+/* Position and sizing of clickable cross button */
+.bm-cross-button {
+  height: 24px;
+  width: 24px;
+}
+
+/* Color/shape of close button cross */
+.bm-cross {
+  background: #bdc3c7;
+}
+
+/* General sidebar styles */
+.bm-menu {
+  background:rgba(34, 34, 34, 0.99);
+  padding: 2.2em 0.6em 0;
+  font-size: 1.15em;
+  overflow-y: hidden !important;
+  text-align: center;
+}
+
+/* Morph shape necessary with bubble or elastic */
+.bm-morph-shape {
+  fill: #373a47;
+}
+
+/* Wrapper for item list */
+.bm-item-list {
+  color: #b8b7ad;
+  padding: 0em;
+  overflow-y: hidden;
+}
+
+/* Styling of overlay */
+.bm-overlay {
+  background: rgba(0, 0, 0, 0.61);
+}
+
+.BrushColor{
+  margin: 2px;
+  font-size: 14px;
+  display: inline-block !important;
+  padding: 3px 5px;
+  border: none;
+  animation-duration: 2s;
+  cursor: pointer;
+  box-shadow: 2px 2px 5px rgba(12, 12, 12, 0.445);
+}
+
+.BrushColor:hover{
+  transform: scale(1.01);
+}
+
+h5{
+  color: white;
+  margin: 8px 0px 10px 0px;
+  border-bottom: 1px solid white;
+  display: inline-block !important;
+  font-size: 13px;
+  padding-bottom: 2px;
+}
+
+.brushSizeSlider {
+  -webkit-appearance: none;
+  width: 80%;
+  height: 10px;
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  margin: 8px auto;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+.brushSizeSlider:hover {
+  opacity: 1;
+}
+
+.brushSizeSlider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 10px;
+  height: 15px;
+  background: rgb(255, 255, 255);
+  cursor: pointer;
+}
+
+.brushSizeSlider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  background: rgb(255, 255, 255);
+  cursor: pointer;
+}
+
+.DragObject{
+  -webkit-filter: drop-shadow(2px 2px 2p #2222228f);
+  filter: drop-shadow(2px 2px 2px #2222228f);
+}
+
+.ActionableBtns{
+  position: absolute;
+  bottom: 20px;
+  width: 100%;
+  left: 50%;
+  transform: translate(-50%, 0%);
+}
+
+.Btn{
+  padding: 10px;
+  display: inline-block !important;
+  cursor: pointer;
+  margin: 10px;
+  animation-duration: 2s;
+  border: none;
+  font-size: 1.6rem;
+  border-radius: 4px;
+  padding: 5px 10px;
+  font-family: 'heroic-condensed-regular', 'Helvetica', serif;
+  box-shadow: 2px 2px 5px rgba(12, 12, 12, 0.445);
+}
+
+button:focus {outline:0;}
+
+.Btn:hover{
+  transform: scale(1.04);
+}
+
+.MakeBtn{
+  background: rgba(41, 128, 41, 0.986);
+  color: white;
+}
+
+.MakeBtn span {
+  font-family: 'heroic-condensed-regular', 'Helvetica', serif;
+  font-size: 1rem;
+  position: relative;
+  vertical-align: middle;
+}

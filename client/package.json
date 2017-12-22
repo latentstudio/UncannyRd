@@ -1,29 +1,25 @@
 {
   "name": "client",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "build": "browserify src/index.js -t [ babelify --presets [ es2015 ] ] | uglifyjs -c > dist/bundle.js",
-    "watch": "watchify src/index.js --outfile dist/bundle.js -t [ babelify --presets [ es2015 ] ]"
-  },
-  "author": "Cristobal Valenzuela <cvalenzuela@nyu.edu> (https://github.com/cvalenzuela)",
-  "license": "ISC",
-  "devDependencies": {
-    "babel-cli": "6.26.0",
-    "babel-preset-es2015": "6.24.1",
-    "babelify": "8.0.0",
-    "browserify": "14.5.0",
-    "uglifyify": "4.0.5",
-    "watchify": "3.9.0"
-  },
+  "version": "0.1.0",
+  "private": true,
   "dependencies": {
     "@tweenjs/tween.js": "17.1.1",
-    "cocoen": "2.0.5",
-    "faker": "4.1.0",
-    "firebase": "4.8.0",
-    "jquery": "3.2.1",
-    "p5": "0.5.16",
-    "pako": "^1.0.6"
+    "immutability-helper": "2.6.2",
+    "react": "^16.2.0",
+    "react-burger-menu": "2.1.11",
+    "react-dnd": "2.5.4",
+    "react-dom": "^16.2.0",
+    "react-draggable": "3.0.4",
+    "react-icons": "2.2.7",
+    "react-p5-wrapper": "0.0.4",
+    "react-resizable": "1.7.5",
+    "react-rnd": "7.3.0",
+    "react-scripts": "1.0.17"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
   }
 }

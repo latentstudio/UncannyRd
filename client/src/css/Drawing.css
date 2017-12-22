@@ -1,0 +1,51 @@
+.ResultImage{
+  background: url('./../img/result.jpg');
+  position: absolute;
+  height: 100%;
+  width: 40%;
+  z-index: 1;
+}
+
+.Handle{
+  position: absolute;
+  top: 44%;
+  color:rgba(14, 14, 14, 0.87);
+  background: white;
+  border-radius: 50%;
+  padding: 2px;
+  font-size: 2rem;
+  opacity: 0.7;
+  transition-duration: 1s;
+  cursor: ew-resize;
+  box-shadow: 0 10px 10px 0 rgba(10, 10, 10, 0.432), 0 10px 10px 0 rgba(0, 0, 0, 0.315);
+  z-index: 3;
+}
+
+.Handle:hover{
+  color:rgba(0, 87, 8, 0.87);
+  transform: scale(1.02);
+}
+
+.ImageCredits{
+  position: absolute;
+  bottom: 0px;
+  background: black;
+  color: #b7b7b7;
+  right: 0px;
+  z-index: 30;
+  padding: 0px 10px;
+  font-size: 10px;
+}
+
+.CompareIcon{
+  position: absolute;
+  z-index: 3;
+}
+
+.react-resizable-handle {
+  z-index: 99;
+  width: 10px;
+  height: 10px;
+  background: red;
+  position: absolute;
+}

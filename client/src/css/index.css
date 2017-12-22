@@ -1,0 +1,43 @@
+@font-face {
+  font-family: 'heroic-condensed-book';
+  src: url('./../fonts/heroic-condensed-book.ttf');
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: 'heroic-condensed-regular';
+  src: url('../fonts/heroic-condensed-regular.ttf');
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: 'benton';
+  src: url('./../fonts/bentonsans-light-webfont.woff');
+  font-weight: lighter;
+}
+
+@font-face {
+  font-family: 'benton-bold';
+  src: url('./../fonts/bentonsans-medium-webfont.woff');
+  font-weight: normal;
+}
+
+*{
+  margin: 0px;
+  padding: 0px;
+  font-family: 'benton', 'Helvetica', serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html,body { 
+  height: 100%; 
+  overflow: hidden; 
+}
+
+a{
+  text-decoration: none;
+  color: white;
+  border-bottom: 1px solid white;
+  padding: 2px;
+}
