@@ -33,9 +33,10 @@ class Drawing extends Component {
       isDraggingAnObject: false,
       objects: [],
       shouldMakeNewImage: false,
+      currentColor: [128, 64, 127],
       brushSize: 20,
-      currentColor: classes[0].color,
-      currentId: classes[0].id,
+      currentColor: classes[5].color,
+      currentId: classes[5].id,
       showLoader: false,
       sliderAnimation: undefined
     }
@@ -84,35 +85,20 @@ class Drawing extends Component {
       shouldMakeNewImage: true
     });
 
-    setTimeout(() => {
+    sendImage(width, height, resultImg => {
       let pos = { left: 0 };
       this.setState({
-        posLeftPercentage: 0,
-        posLeftPx: 0,
+        posLeft: 0,
         shouldMakeNewImage: false,
         showLoader: false,
+        resultImg: `url(data:image/jpeg;base64,${resultImg})`,
         sliderAnimation: new TWEEN.Tween(pos).to({ left: 70 }, 10000).easing(TWEEN.Easing.Exponential.Out).onUpdate(() => { 
           this.setState({
             posLeftPercentage: pos.left,
             posLeftPx: (window.innerWidth/100)*pos.left,
           }) }).start()
       }, () => clearSketch());
-    }, 2000);
-
-    // sendImage(width, height, resultImg => {
-    //   let pos = { left: 0 };
-    //   this.setState({
-    //     posLeft: 0,
-    //     shouldMakeNewImage: false,
-    //     showLoader: false,
-    //     resultImg: `url(data:image/jpeg;base64,${resultImg})`,
-    //     sliderAnimation: new TWEEN.Tween(pos).to({ left: 70 }, 10000).easing(TWEEN.Easing.Exponential.Out).onUpdate(() => { 
-    //       this.setState({
-    //         posLeftPercentage: pos.left,
-    //         posLeftPx: (window.innerWidth/100)*pos.left,
-    //       }) }).start()
-    //   }, () => clearSketch());
-    // });
+    });
   }
 
   render() {
@@ -137,6 +123,7 @@ class Drawing extends Component {
         <NavigationWidget />
         <Menu
           brushSize={brushSize}
+          currentColor={this.state.currentColor}
           changeColor={color => this.setState({currentColor: color})}
           isMenuActive={isMenuActive}
           showLoader={showLoader}

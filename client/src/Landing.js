@@ -3,6 +3,7 @@ Landing page
 */
 
 import React, { Component } from 'react';
+import {shuffleArray} from './utils';
 import uncanny from './videos/uncannyrd.mp4';
 import poster from './img/result.jpg';
 import './css/Landing.css';
@@ -10,6 +11,16 @@ import './css/Landing.css';
 class Landing extends Component {
   render() {
     const { click } = this.props;
+    const authors = shuffleArray([
+      {
+        name: "Anastasis Germanidis",
+        url: "http://agermanidis.com"
+      },
+      {
+        name: "Cristóbal Valenzuela",
+        url: "http://cvalenzuelab.com"
+      }
+    ]);
 
     return (
       <div className="LandingPage">
@@ -30,9 +41,9 @@ class Landing extends Component {
         </div>
 
         <div className="Credits">
-          <p>Made by <a href="http://cvalenzuelab.com/" target="_blank" rel="noopener noreferrer">Cristóbal Valenzuela</a> and <a href="http://agermanidis.com" target="_blank" rel="noopener noreferrer">Anastasis Germanidis</a></p>
+          <p>Made by <a href={authors[0].url} target="_blank" rel="noopener noreferrer">{authors[0].name}</a>
+          and <a href={authors[1].url} target="_blank" rel="noopener noreferrer">{authors[1].name}</a></p>
         </div>
-
       </div>
     );
   }

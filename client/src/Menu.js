@@ -50,6 +50,9 @@ class BurgerMenu extends Component {
                 background: color2css(c.color),
                 color: color2css(c.textColor)
               }
+              if (c.color == this.props.currentColor) {
+                style.border = "1px solid white";
+              }
               return <button
                 onClick={() => this.props.changeColor(c.color)} 
                 key={c.color}

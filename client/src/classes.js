@@ -2,9 +2,9 @@
 
 const classes = [
   { color: [0, 0, 0], label: "unlabeled", id: 0, textColor: [255,255,255], visible: false },
-  { color: [255, 0, 104], label: "ego vehicle", id: 1, textColor: [255,255,255], visible: true },
+  { color: [255, 0, 104], label: "ego vehicle", id: 1, textColor: [255,255,255], visible: false },
   { color: [28, 255, 215], label: "rectification border", id: 2, textColor: [0,0,0], visible: false },
-  { color:  [185, 249, 72], label: "out of roi", id: 3, textColor: [0,0,0], visible: false },
+  { color: [185, 249, 72], label: "out of roi", id: 3, textColor: [0,0,0], visible: false },
   { color: [255, 255, 255], label: "static", id: 4, textColor: [0,0,0], visible: false},
   { color: [128, 64, 127], label: "road", id: 7, textColor: [255,255,255], visible: true },
   { color: [243, 36, 232], label: "sidewalk", id: 8, textColor: [255,255,255], visible: true },
