@@ -24,8 +24,8 @@ let shouldMakeNewImage = false;
 let isDraggingAnObject;
 let clearSketch; 
 
-let currentColor = classes[0].color;
-let currentId = classes[0].id;
+let currentColor;
+let currentId;
 
 const sketch = p => {
 
@@ -38,6 +38,8 @@ const sketch = p => {
     menuWidth = props.menuWidth;
     isMenuActive = props.isMenuActive;
     objects = props.objects;
+    currentColor = props.currentColor;
+    currentId = props.currentId;
     shouldMakeNewImage = props.shouldMakeNewImage;
     updateMakeStatus = props.updateMakeStatus;
     isDraggingAnObject = props.isDraggingAnObject;

@@ -20,19 +20,20 @@ class BurgerMenu extends Component {
   }
 
   handleColorChange = e => {
-    console.log(e);
+    console.log(e.target.style.background);
+    this.props.changeColor('test');
   }
 
   render() {
     const { isMenuActive, updateStatus, brushSize, showLoader } = this.props;
     let makeBtnStyle = {
-      background: ''
+      background: 'rgba(41, 128, 41, 0.986)'
     }
 
     if(showLoader) {
       makeBtnStyle = {
-      background: ''
-    }
+        background: 'rgba(95, 95, 95, 0.986)'
+      }
     }
 
     let burgerIcon = <MdBrush />
@@ -90,7 +91,7 @@ class BurgerMenu extends Component {
           />
           <div className="ActionableBtns">
             {showLoader ? <img src={loader} alt="loader" srcSet={loader} className="Loader"/>: null}
-            <button className="MakeBtn Btn" onClick={(e) => this.props.make(e)}>MAKE <span>RD</span></button>
+            <button className="MakeBtn Btn" onClick={(e) => this.props.make(e)} style={makeBtnStyle}>GENERATE <span>RD</span></button>
             <button className="ClearBtn Btn" onClick={() => clearSketch()}>CLEAR ALL</button>
           </div>
 

@@ -9,6 +9,7 @@ import MdSwapHoriz from 'react-icons/lib/md/swap-horiz';
 import update from 'immutability-helper';
 import TWEEN from '@tweenjs/tween.js';
 
+import { classes } from './classes';
 import sendImage from './upload';
 import { sketch, clearSketch } from './Sketch';
 import DraggableObject from './DraggableObject';
@@ -33,6 +34,8 @@ class Drawing extends Component {
       objects: [],
       shouldMakeNewImage: false,
       brushSize: 20,
+      currentColor: classes[0].color,
+      currentId: classes[0].id,
       showLoader: false,
       sliderAnimation: undefined
     }
@@ -124,7 +127,9 @@ class Drawing extends Component {
       isMenuActive,
       shouldMakeNewImage,
       isDraggingAnObject,
-      showLoader
+      showLoader,
+      currentColor,
+      currentId
     } = this.state;
 
     return (
@@ -132,6 +137,7 @@ class Drawing extends Component {
         <NavigationWidget />
         <Menu
           brushSize={brushSize}
+          changeColor={(c) => console.log(c)}
           isMenuActive={isMenuActive}
           showLoader={showLoader}
           updateBrushSize={s => this.setState({brushSize: s })}
@@ -147,7 +153,13 @@ class Drawing extends Component {
           // grid={[0, window.innerWidth - 40]}
           position={{x: this.state.posLeftPx, y: 330}}
           defaultPosition={{x: this.state.posLeftPx, y: 330}}
-          onDrag={e => this.setState({posLeftPx: e.clientX, posLeftPercentage: (e.clientX/window.innerWidth)*100})}
+          onDrag={e => {
+              this.state.sliderAnimation && this.state.sliderAnimation.stop();
+              this.setState({
+              posLeftPx: e.clientX,
+              posLeftPercentage: (e.clientX/window.innerWidth)*100,
+            })
+          }}
           onStart={() => this.setState({isComparing: true})}
           onStop={() => this.setState({isComparing: false})}
           defaultClassName="CompareIcon">
@@ -176,6 +188,8 @@ class Drawing extends Component {
           shouldMakeNewImage={shouldMakeNewImage}
           brushSize={brushSize}
           menuWidth={menuWidth}
+          currentColor={currentColor}
+          currentId={currentId}
           />
         <p className="ImageCredits">Image drawn by a human: December 2017 © The robots from Mars</p>
       </div>
