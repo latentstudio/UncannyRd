@@ -5,6 +5,7 @@
   "dependencies": {
     "@tweenjs/tween.js": "17.1.1",
     "immutability-helper": "2.6.2",
+    "jquery": "3.2.1",
     "pako": "1.0.6",
     "react": "^16.2.0",
     "react-burger-menu": "2.1.11",

@@ -76,43 +76,30 @@ class Drawing extends Component {
     });
   }
 
-  makeNewImage = () => {
-    const { width, height } = this.props;
-    
+  makeNewImage = () => {   
     this.setState({
       showLoader: true,
       shouldMakeNewImage: true
     });
+  }
 
-    setTimeout(() => {
+  sendCanvasToServer = () => {
+    const { width, height } = this.props;
+    
+    sendImage(width, height, resultImg => {
       let pos = { left: 0 };
       this.setState({
-        posLeftPercentage: 0,
-        posLeftPx: 0,
+        posLeft: 0,
         shouldMakeNewImage: false,
         showLoader: false,
+        resultImg: `data:image/jpeg;base64,${resultImg}`,
         sliderAnimation: new TWEEN.Tween(pos).to({ left: 70 }, 10000).easing(TWEEN.Easing.Exponential.Out).onUpdate(() => { 
           this.setState({
             posLeftPercentage: pos.left,
             posLeftPx: (window.innerWidth/100)*pos.left,
           }) }).start()
       }, () => clearSketch());
-    }, 2000);
-
-    // sendImage(width, height, resultImg => {
-    //   let pos = { left: 0 };
-    //   this.setState({
-    //     posLeft: 0,
-    //     shouldMakeNewImage: false,
-    //     showLoader: false,
-    //     resultImg: `url(data:image/jpeg;base64,${resultImg})`,
-    //     sliderAnimation: new TWEEN.Tween(pos).to({ left: 70 }, 10000).easing(TWEEN.Easing.Exponential.Out).onUpdate(() => { 
-    //       this.setState({
-    //         posLeftPercentage: pos.left,
-    //         posLeftPx: (window.innerWidth/100)*pos.left,
-    //       }) }).start()
-    //   }, () => clearSketch());
-    // });
+    });
   }
 
   render() {
@@ -184,7 +171,10 @@ class Drawing extends Component {
           isMenuActive={isMenuActive}
           isComparing={isComparing}
           isDraggingAnObject={isDraggingAnObject}
-          updateMakeStatus={() => this.setState({shouldMakeNewImage: false})}
+          updateMakeStatus={() => {
+            this.setState({shouldMakeNewImage: false});
+            this.sendCanvasToServer();
+          }}
           shouldMakeNewImage={shouldMakeNewImage}
           brushSize={brushSize}
           menuWidth={menuWidth}

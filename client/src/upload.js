@@ -2,10 +2,12 @@
 
 import { guid, saveToArray } from './utils';
 import { classes } from './classes';
+import $ from "jquery";
 import TWEEN from '@tweenjs/tween.js';
 import pako from "pako";
 
-const URL = 'http://52.91.152.195:8888/infer'
+
+const URL = 'http://34.229.68.209:8888/infer'
 
 // Submit a new image
 const sendImage = (width, height, callback) => {
@@ -15,10 +17,13 @@ const sendImage = (width, height, callback) => {
   const fd = new FormData();
   fd.append("file", blob);
 
-  fetch(URL, {
-    method: "POST",
-    body: fd
-  }).then(data => {
+  $.ajax({
+    type: "POST",
+    url: URL,
+    data: fd,
+    processData: false,
+    contentType: false
+  }).done(data => {
     callback(data);
   });
 };
