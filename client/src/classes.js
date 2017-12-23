@@ -23,17 +23,6 @@ const classes = [
   { color: [125, 8, 33], label: "bicycle", id: 33, textColor: [255,255,255], visible: true}
 ];
 
-const items = [
-  'person01.png',
-  'person02.png',
-  'car01.png',
-  'car02.png',
-  'bicyclist.png',
-  'sign_template.png',
-  'tree.png'
-];
-
 export {
-  classes,
-  items
+  classes
 }

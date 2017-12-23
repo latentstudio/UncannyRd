@@ -3,9 +3,14 @@ p5 Sketch
 */
 import TWEEN from '@tweenjs/tween.js';
 import { classes } from './classes';
-import startImage from './img/start.png';
+import startImage from './img/empty.png';
 
-import car from './img/items/car01.png';
+const importAllImages = r => {
+  return r.keys().map(r);
+}
+
+const preDrawnImages = importAllImages(require.context('./img/items/', false, /\.(png|jpe?g|svg)$/));
+window.preDrawnImages = preDrawnImages;
 
 let canvas;
 let startImg;
@@ -17,12 +22,11 @@ let brushSize;
 let menuWidth;
 let isMenuActive;
 let objects;
-let preloadObjectsNames = ['car01.png']
 let preloadObjects = [];
 let updateMakeStatus;
 let shouldMakeNewImage = false;
 let isDraggingAnObject;
-let clearSketch; 
+let clearSketch;
 
 let currentColor;
 let currentId;
@@ -46,8 +50,8 @@ const sketch = p => {
   };
 
   p.preload = () => {
-    preloadObjectsNames.forEach(name => {
-      preloadObjects.push(p.loadImage(car))
+    preDrawnImages.forEach(name => {
+      preloadObjects.push(p.loadImage(name))
     });
     startImg = p.loadImage(startImage)
   };
@@ -80,20 +84,20 @@ const sketch = p => {
     // When shouldMakeNewImage is true, copy all the <img> to the canvas
     if (shouldMakeNewImage) {
       objects.forEach(object => {
-        const index = preloadObjectsNames.findIndex(name => {return name === object.name });
-        p.image(preloadObjects[index], object.x, object.y-20, object.width, object.height);
+        p.image(preloadObjects[object.key], object.x, object.y, object.width, object.height);
       });
-      updateMakeStatus();
+      updateMakeStatus(); 
     }
   }
 
   clearSketch = () => {
-    //p.clear();
-    //p.copy(startImg, 0, 0, width, height, 0, 0, width, height);
+    p.clear();
+    p.copy(startImg, 0, 0, width, height, 0, 0, width, height);
   }
 };
 
 export {
   sketch,
-  clearSketch
+  clearSketch,
+  preDrawnImages
 }

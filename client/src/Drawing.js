@@ -15,7 +15,6 @@ import { sketch, clearSketch } from './Sketch';
 import DraggableObject from './DraggableObject';
 import Menu from './Menu';
 import NavigationWidget from './NavigationWidget';
-import { guid } from './utils'
 import startingResultImage from './img/result.jpg'
 
 import './css/Drawing.css';
@@ -41,15 +40,14 @@ class Drawing extends Component {
     }
   }
 
-  handleNewDragObject = (x, y, elt) => {
+  handleNewDragObject = (x, y, elt, index) => {
     const newObject = {
-      key: guid(),
+      key: index,
       x,
       y,
-      width: 166,
-      height: 100,
-      src: elt.src,
-      name: 'car01.png'
+      width: 400,
+      height: 400,
+      src: elt.src
     };
     this.setState({
       objects: update(this.state.objects, {$push: [newObject]}),
@@ -85,7 +83,7 @@ class Drawing extends Component {
 
   sendCanvasToServer = () => {
     const { width, height } = this.props;
-    
+
     sendImage(width, height, resultImg => {
       let pos = { left: 0 };
       this.setState({
@@ -98,7 +96,7 @@ class Drawing extends Component {
             posLeftPercentage: pos.left,
             posLeftPx: (window.innerWidth/100)*pos.left,
           }) }).start()
-      }, () => clearSketch());
+      });
     });
   }
 
@@ -133,19 +131,24 @@ class Drawing extends Component {
           make={this.makeNewImage}
           startDraggingObject={() => this.setState({isDraggingAnObject: true})}
         />
-        <div className="ResultImage" style={{width: `${posLeftPercentage}%`, background: `url(${this.state.resultImg})`}} />
+        <div
+          className="ResultImage"
+          style={{width: `${posLeftPercentage}%`, 
+          background: `url(${this.state.resultImg})`}}
+        />
         <Draggable
           axis="x"
           handle=".Handle"
-          // grid={[0, window.innerWidth - 40]}
           position={{x: this.state.posLeftPx, y: 330}}
           defaultPosition={{x: this.state.posLeftPx, y: 330}}
           onDrag={e => {
               this.state.sliderAnimation && this.state.sliderAnimation.stop();
-              this.setState({
-              posLeftPx: e.clientX,
-              posLeftPercentage: (e.clientX/window.innerWidth)*100,
-            })
+              if(e.clientX > 0 && e.clientX < window.innerWidth - 10){
+                this.setState({
+                  posLeftPx: e.clientX,
+                  posLeftPercentage: (e.clientX/window.innerWidth)*100
+                })
+              }
           }}
           onStart={() => this.setState({isComparing: true})}
           onStop={() => this.setState({isComparing: false})}

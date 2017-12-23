@@ -119,6 +119,10 @@ h5{
 .DragObject{
   -webkit-filter: drop-shadow(2px 2px 2p #2222228f);
   filter: drop-shadow(2px 2px 2px #2222228f);
+  filter: drop-shadow(2px 2px 2px #2222228f);
+  width: 3.5rem;
+  margin: 5px;
+  display: inline-block !important;
 }
 
 .ActionableBtns{
@@ -165,4 +169,9 @@ button:focus {outline:0;}
   width: 25px;
   display: block;
   margin: 10px auto;
+}
+
+.ViewRoadBtn{
+  background: rgb(240, 240, 240);
+  border-top: 1px solid white;
 }

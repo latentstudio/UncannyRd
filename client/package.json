@@ -14,8 +14,6 @@
     "react-draggable": "3.0.4",
     "react-icons": "2.2.7",
     "react-p5-wrapper": "0.0.4",
-    "react-resizable": "1.7.5",
-    "react-rnd": "7.3.0",
     "react-scripts": "1.0.17"
   },
   "scripts": {

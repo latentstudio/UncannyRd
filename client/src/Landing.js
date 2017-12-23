@@ -30,7 +30,7 @@ class Landing extends Component {
         </div>
 
         <div className="Credits">
-          <p>Made by <a href="http://cvalenzuelab.com/" target="_blank" rel="noopener noreferrer">Cristóbal Valenzuela</a> and <a href="http://agermanidis.com" target="_blank" rel="noopener noreferrer">Anastasis Germanidis</a></p>
+          <p>Made by <a href="http://agermanidis.com" target="_blank" rel="noopener noreferrer">Anastasis Germanidis</a> and <a href="http://cvalenzuelab.com/" target="_blank" rel="noopener noreferrer">Cristóbal Valenzuela</a></p>
         </div>
 
       </div>

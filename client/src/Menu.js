@@ -9,8 +9,9 @@ import MdBrush from 'react-icons/lib/md/brush';
 import { clearSketch } from './Sketch';
 import { classes } from './classes';
 import loader from './img/loader.gif';
-import car from './img/items/car01.png';
-import { color2css } from './utils';
+import car from './img/items/i-01.png';
+import { color2css, guid } from './utils';
+import { preDrawnImages } from './Sketch';
 
 import './css/Menu.css';
 
@@ -73,21 +74,24 @@ class BurgerMenu extends Component {
             className="brushSizeSlider"
           />
           <div><h5>Drag Objects</h5></div>
-          <img 
-            src={car} 
-            alt="car" 
-            key="car"
-            name="car01.png"
-            srcSet={car}
-            className="DragObject"
-            draggable={true}
-            onDrag={() => this.props.startDraggingObject()}
-            onDragEnd={(e) => this.props.newObject(e.clientX, e.clientY, e.target)}
-          />
+          {preDrawnImages.map((image, index) => {
+            return <img 
+              src={image} 
+              alt={index}
+              key={index}
+              name={index}
+              srcSet={image}
+              className="DragObject"
+              draggable={true}
+              onDrag={() => this.props.startDraggingObject()}
+              onDragEnd={(e) => this.props.newObject(e.clientX, e.clientY, e.target, index)}
+            />
+          })}
           <div className="ActionableBtns">
             {showLoader ? <img src={loader} alt="loader" srcSet={loader} className="Loader"/>: null}
             <button className="MakeBtn Btn" onClick={(e) => this.props.make(e)} style={makeBtnStyle}>GENERATE <span>RD</span></button>
             <button className="ClearBtn Btn" onClick={() => clearSketch()}>CLEAR ALL</button>
+            <button className="ViewRoadBtn Btn" onClick={() => clearSketch()}>VIEW ROAD</button>
           </div>
 
        </Menu>
