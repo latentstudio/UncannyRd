@@ -7,7 +7,7 @@ import TWEEN from '@tweenjs/tween.js';
 import pako from "pako";
 
 
-const URL = 'http://34.229.68.209:8888/infer'
+const URL = 'http://127.0.0.1:8888/infer'
 
 // Submit a new image
 const sendImage = (width, height, callback) => {
