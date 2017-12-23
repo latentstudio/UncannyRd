@@ -27,6 +27,7 @@ let updateMakeStatus;
 let shouldMakeNewImage = false;
 let isDraggingAnObject;
 let clearSketch;
+let mousePressed = false;
 
 let currentColor;
 let currentId;
@@ -71,14 +72,8 @@ const sketch = p => {
     p.fill(currentColor[0], currentColor[1], currentColor[2]);
     p.noStroke();
     // User draw
-    if (p.mouseIsPressed && !isComparing && !isDraggingAnObject) {
-      if (isMenuActive) {
-        if (p.mouseX < window.innerWidth - menuWidth) {
-          p.ellipse(p.mouseX, p.mouseY, parseInt(brushSize));
-        }
-      } else {
-        p.ellipse(p.mouseX, p.mouseY, parseInt(brushSize));
-      } 
+    if (mousePressed && !isComparing && !isDraggingAnObject) {
+      p.ellipse(p.mouseX, p.mouseY, parseInt(brushSize));
     }
 
     // When shouldMakeNewImage is true, copy all the <img> to the canvas
@@ -90,9 +85,18 @@ const sketch = p => {
     }
   }
 
+  p.mousePressed = (e) => {
+    if (e.target !== canvas.elt) return;
+    mousePressed = true;
+  }
+
+  p.mouseReleased = () => {
+    mousePressed = false;
+  }
+
   clearSketch = () => {
-    p.clear();
-    p.copy(startImg, 0, 0, width, height, 0, 0, width, height);
+    //p.clear();
+    //p.copy(startImg, 0, 0, width, height, 0, 0, width, height);
   }
 };
 

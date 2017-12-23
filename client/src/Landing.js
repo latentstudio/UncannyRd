@@ -3,13 +3,25 @@ Landing page
 */
 
 import React, { Component } from 'react';
+import {shuffleArray} from './utils';
 import uncanny from './videos/uncannyrd.mp4';
 import poster from './img/result.jpg';
 import './css/Landing.css';
 
 class Landing extends Component {
   render() {
-    const { click } = this.props;
+    const { select } = this.props;
+
+    const authors = shuffleArray([
+      {
+        name: "Anastasis Germanidis",
+        url: "http://agermanidis.com"
+      },
+      {
+        name: "Cristóbal Valenzuela",
+        url: "http://cvalenzuelab.com"
+      }
+    ]);
 
     return (
       <div className="LandingPage">
@@ -20,19 +32,20 @@ class Landing extends Component {
 
         <div className="Intro">
           <div className="Title">
-            <h1>UNCANNY <span>RD</span></h1>
+            <h1 data-text="UNCANNY">UNCANNY <span>RD</span></h1>
           </div>
           <div className="Description">
-          A tool for collaboratively hallucinating a road using Generative Adversarial Neural Networks.
+          Collectively hallucinating a never-ending road using Generative Adversarial Neural Networks.
           </div>
 
-          <button className="StartBtn" onClick={click}>Start</button>
+          {/* <div><button className="StartBtn" onClick={() => select('view')}>View Road</button></div> */}
+          <div><button className="StartBtn" onClick={() => select('create')}>Start</button></div>
         </div>
 
         <div className="Credits">
-          <p>Made by <a href="http://agermanidis.com" target="_blank" rel="noopener noreferrer">Anastasis Germanidis</a> and <a href="http://cvalenzuelab.com/" target="_blank" rel="noopener noreferrer">Cristóbal Valenzuela</a></p>
+          <p>Made by <a href={authors[0].url} target="_blank" rel="noopener noreferrer">{authors[0].name}</a>
+          and <a href={authors[1].url} target="_blank" rel="noopener noreferrer">{authors[1].name}</a></p>
         </div>
-
       </div>
     );
   }

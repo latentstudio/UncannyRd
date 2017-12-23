@@ -32,11 +32,14 @@ class Drawing extends Component {
       isDraggingAnObject: false,
       objects: [],
       shouldMakeNewImage: false,
+      currentColor: [128, 64, 127],
       brushSize: 20,
-      currentColor: classes[0].color,
-      currentId: classes[0].id,
+      currentColor: classes[5].color,
+      currentId: classes[5].id,
       showLoader: false,
-      sliderAnimation: undefined
+      sliderAnimation: undefined,
+      currentBlock: 0,
+      viewMode: true
     }
   }
 
@@ -83,7 +86,7 @@ class Drawing extends Component {
 
   sendCanvasToServer = () => {
     const { width, height } = this.props;
-
+    
     sendImage(width, height, resultImg => {
       let pos = { left: 0 };
       this.setState({
@@ -96,7 +99,7 @@ class Drawing extends Component {
             posLeftPercentage: pos.left,
             posLeftPx: (window.innerWidth/100)*pos.left,
           }) }).start()
-      });
+      }, () => clearSketch());
     });
   }
 
@@ -121,6 +124,7 @@ class Drawing extends Component {
       <div className="DrawingPage">
         <NavigationWidget />
         <Menu
+          currentColor={currentColor}
           brushSize={brushSize}
           changeColor={color => this.setState({currentColor: color})}
           isMenuActive={isMenuActive}

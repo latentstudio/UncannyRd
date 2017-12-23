@@ -19,9 +19,10 @@ class App extends Component {
     };
   }
 
-  handleClick = () => {
+  handleClick = (view) => {
     this.setState({
-      showLanding: !this.state.showLanding
+      showLanding: !this.state.showLanding,
+      viewing: view
     })
   }
 
@@ -29,7 +30,12 @@ class App extends Component {
     const { showLanding } = this.state;
     return(
       <div>
-        {showLanding ? <Landing click={this.handleClick} /> : <Drawing width={this.state.width} height={this.state.height} /> }
+        {showLanding ? 
+        <Landing select={this.handleClick} /> : 
+        <Drawing
+          onClickBack={() => this.setState({showLanding: true})}
+          width={this.state.width} 
+          height={this.state.height} /> }
       </div>
     )
   }
