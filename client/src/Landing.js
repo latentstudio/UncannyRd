@@ -10,7 +10,8 @@ import './css/Landing.css';
 
 class Landing extends Component {
   render() {
-    const { click } = this.props;
+    const { select } = this.props;
+
     const authors = shuffleArray([
       {
         name: "Anastasis Germanidis",
@@ -31,13 +32,14 @@ class Landing extends Component {
 
         <div className="Intro">
           <div className="Title">
-            <h1>UNCANNY <span>RD</span></h1>
+            <h1 data-text="UNCANNY">UNCANNY <span>RD</span></h1>
           </div>
           <div className="Description">
-          A tool for collaboratively hallucinating a road using Generative Adversarial Neural Networks.
+          Collectively hallucinating a never-ending road using Generative Adversarial Neural Networks.
           </div>
 
-          <button className="StartBtn" onClick={click}>Start</button>
+          <div><button className="StartBtn" onClick={() => select('view')}>View Road</button></div>
+          <div><button className="StartBtn" onClick={() => select('create')}>Create New Block</button></div>
         </div>
 
         <div className="Credits">

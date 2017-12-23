@@ -12,6 +12,7 @@
   display: inline-block;
   border-right: 1px solid #777777ad;
   padding: 5px;
+  cursor: pointer;
 }
 
 .Backarrow{

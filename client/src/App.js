@@ -14,14 +14,16 @@ class App extends Component {
     super();
     this.state = {
       showLanding: false,
+      viewing: 'create',
       width: 2048,
       height: 1024
     };
   }
 
-  handleClick = () => {
+  handleClick = (view) => {
     this.setState({
-      showLanding: !this.state.showLanding
+      showLanding: !this.state.showLanding,
+      viewing: view
     })
   }
 
@@ -29,7 +31,12 @@ class App extends Component {
     const { showLanding } = this.state;
     return(
       <div>
-        {showLanding ? <Landing click={this.handleClick} /> : <Drawing width={this.state.width} height={this.state.height} /> }
+        {showLanding ? 
+        <Landing select={this.handleClick} /> : 
+        <Drawing
+          onClickBack={() => this.setState({showLanding: true})}
+          width={this.state.width} 
+          height={this.state.height} /> }
       </div>
     )
   }

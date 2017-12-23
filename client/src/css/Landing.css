@@ -86,6 +86,7 @@ data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAJElEQVQYV2
   color:white;
   cursor: pointer;
   transition-duration: 1s;
+  margin: 1em;
 }
 
 .StartBtn:hover{

@@ -38,7 +38,9 @@ class Drawing extends Component {
       currentColor: classes[5].color,
       currentId: classes[5].id,
       showLoader: false,
-      sliderAnimation: undefined
+      sliderAnimation: undefined,
+      currentBlock: 0,
+      viewMode: true
     }
   }
 
@@ -77,21 +79,23 @@ class Drawing extends Component {
     });
   }
 
-  makeNewImage = () => {
-    const { width, height } = this.props;
-    
+  makeNewImage = () => {   
     this.setState({
       showLoader: true,
       shouldMakeNewImage: true
     });
+  }
 
+  sendCanvasToServer = () => {
+    const { width, height } = this.props;
+    
     sendImage(width, height, resultImg => {
       let pos = { left: 0 };
       this.setState({
         posLeft: 0,
         shouldMakeNewImage: false,
         showLoader: false,
-        resultImg: `url(data:image/jpeg;base64,${resultImg})`,
+        resultImg: `data:image/jpeg;base64,${resultImg}`,
         sliderAnimation: new TWEEN.Tween(pos).to({ left: 70 }, 10000).easing(TWEEN.Easing.Exponential.Out).onUpdate(() => { 
           this.setState({
             posLeftPercentage: pos.left,
@@ -118,69 +122,53 @@ class Drawing extends Component {
       currentId
     } = this.state;
 
-    return (
-      <div className="DrawingPage">
-        <NavigationWidget />
-        <Menu
-          brushSize={brushSize}
-          currentColor={this.state.currentColor}
-          changeColor={color => this.setState({currentColor: color})}
-          isMenuActive={isMenuActive}
-          showLoader={showLoader}
-          updateBrushSize={s => this.setState({brushSize: s })}
-          updateStatus={() => this.setState({isMenuActive: !this.state.isMenuActive})}
-          newObject={this.handleNewDragObject}
-          make={this.makeNewImage}
-          startDraggingObject={() => this.setState({isDraggingAnObject: true})}
-        />
-        <div className="ResultImage" style={{width: `${posLeftPercentage}%`, background: `url(${this.state.resultImg})`}} />
-        <Draggable
-          axis="x"
-          handle=".Handle"
-          // grid={[0, window.innerWidth - 40]}
-          position={{x: this.state.posLeftPx, y: 330}}
-          defaultPosition={{x: this.state.posLeftPx, y: 330}}
-          onDrag={e => {
+    let resultWidthPercentage = this.state.viewMode ? 100 : posLeftPercentage;
+
+    return <div className="DrawingPage">
+        <NavigationWidget 
+          currentBlock={this.state.currentBlock}
+          onClickBack={this.props.onClickBack} />
+        {!this.state.viewMode && <Menu brushSize={brushSize} currentColor={this.state.currentColor} changeColor={color => this.setState(
+              { currentColor: color }
+            )} isMenuActive={isMenuActive} showLoader={showLoader} updateBrushSize={s => this.setState(
+              { brushSize: s }
+            )} updateStatus={() => this.setState({
+              isMenuActive: !this.state.isMenuActive
+            })} newObject={this.handleNewDragObject} make={this.makeNewImage} startDraggingObject={() => this.setState(
+              { isDraggingAnObject: true }
+            )} />}
+        <div className="ResultImage" style={{ width: `${resultWidthPercentage}%`, background: `url(${this.state.resultImg})` }} />
+        {!this.state.viewMode && <Draggable axis="x" handle=".Handle" // grid={[0, window.innerWidth - 40]}
+            position={{ x: this.state.posLeftPx, y: 330 }} defaultPosition={{ x: this.state.posLeftPx, y: 330 }} onDrag={e => {
               this.state.sliderAnimation && this.state.sliderAnimation.stop();
               this.setState({
-              posLeftPx: e.clientX,
-              posLeftPercentage: (e.clientX/window.innerWidth)*100,
-            })
-          }}
-          onStart={() => this.setState({isComparing: true})}
-          onStop={() => this.setState({isComparing: false})}
-          defaultClassName="CompareIcon">
-          <div>
-            <MdSwapHoriz className="Handle"/>
-          </div>
-        </Draggable>
-        {this.state.objects.map((object, index) => { return (
-          <DraggableObject
-            key={object.key}
-            values={object}
-            update={this.updateDraggableObject}
-            setDraggingOn={() => this.setState({isDraggingAnObject: true})}
-            setDraggingOff={() => this.setState({isDraggingAnObject: false})}
-            />
-          )})};
-        <P5Wrapper 
-          sketch={sketch}
-          width={width}
-          height={height}
-          objects={objects}
-          isMenuActive={isMenuActive}
-          isComparing={isComparing}
-          isDraggingAnObject={isDraggingAnObject}
-          updateMakeStatus={() => this.setState({shouldMakeNewImage: false})}
-          shouldMakeNewImage={shouldMakeNewImage}
-          brushSize={brushSize}
-          menuWidth={menuWidth}
-          currentColor={currentColor}
-          currentId={currentId}
-          />
-        <p className="ImageCredits">Image drawn by a human: December 2017 © The robots from Mars</p>
-      </div>
-    );
+                posLeftPx: e.clientX,
+                posLeftPercentage: e.clientX / window.innerWidth * 100
+              });
+            }} onStart={() => this.setState({
+                isComparing: true
+              })} onStop={() => this.setState({
+                isComparing: false
+              })} defaultClassName="CompareIcon">
+            <div>
+              <MdSwapHoriz className="Handle" />
+            </div>
+          </Draggable>}
+        {this.state.objects.map((object, index) => {
+          return <DraggableObject key={object.key} values={object} update={this.updateDraggableObject} setDraggingOn={() => this.setState(
+                  { isDraggingAnObject: true }
+                )} setDraggingOff={() => this.setState({
+                  isDraggingAnObject: false
+                })} />;
+        })};
+        <P5Wrapper sketch={sketch} width={width} height={height} objects={objects} isMenuActive={isMenuActive} isComparing={isComparing} isDraggingAnObject={isDraggingAnObject} updateMakeStatus={() => {
+            this.setState({ shouldMakeNewImage: false });
+            this.sendCanvasToServer();
+          }} shouldMakeNewImage={shouldMakeNewImage} brushSize={brushSize} menuWidth={menuWidth} currentColor={currentColor} currentId={currentId} />
+        <p className="ImageCredits">
+          Image drawn by a human: December 2017 © The robots from Mars
+        </p>
+      </div>;
   }
 }
 

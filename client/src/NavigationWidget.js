@@ -10,19 +10,17 @@ import './css/NavigationWidget.css';
 
 class NavigationWidget extends Component {
   render() {
-    return (
-      <div className="NavigationWidget">
+    return <div className="NavigationWidget">
         <div className="Back">
-          <MdArrowBack className='Backarrow' />
+          <MdArrowBack onClick={this.props.onClickBack} className="Backarrow" />
         </div>
         <div className="StreetInfo">
           <p id="streetName">Uncanny Rd.</p>
-          <MdPlace className='PlaceIcon'/>
-          <p id="city">Uncanny Valley</p>
+          <MdPlace className="PlaceIcon" />
+          <p id="block-number">Block #{this.props.currentBlock}</p>
           <p id="date">December 2017</p>
         </div>
-      </div>
-    );
+      </div>;
   }
 }
 

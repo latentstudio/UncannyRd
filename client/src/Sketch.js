@@ -88,8 +88,8 @@ const sketch = p => {
   }
 
   clearSketch = () => {
-    p.clear();
-    p.copy(startImg, 0, 0, width, height, 0, 0, width, height);
+    //p.clear();
+    //p.copy(startImg, 0, 0, width, height, 0, 0, width, height);
   }
 };
 
