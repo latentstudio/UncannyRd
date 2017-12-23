@@ -47,6 +47,5 @@ def infer():
     im_pil.save(buffer, format='JPEG')
     return base64.b64encode(buffer.getvalue())
 
-
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8888)
