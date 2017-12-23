@@ -13,7 +13,7 @@ class App extends Component {
   constructor(){
     super();
     this.state = {
-      showLanding: false,
+      showLanding: true,
       width: 2048,
       height: 1024
     };
