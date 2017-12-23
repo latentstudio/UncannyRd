@@ -32,6 +32,8 @@
   top: 0px;
   left: 0px;
   z-index: 0;
+  width: auto;
+  height: 100%;
 }
 
 .Overlay{
