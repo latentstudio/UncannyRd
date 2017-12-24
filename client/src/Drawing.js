@@ -246,6 +246,7 @@ class Drawing extends Component {
           />
         <p className="ImageCredits">Image drawn by a human: December 2017 © The robots from Mars</p>
       </div>
+      </div>
     );
   }
 }

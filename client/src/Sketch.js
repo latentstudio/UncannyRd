@@ -27,11 +27,8 @@ let updateMakeStatus;
 let shouldMakeNewImage = false;
 let isDraggingAnObject;
 let clearSketch;
-<<<<<<< HEAD
 let mousePressed = false;
-=======
 let clearObjects;
->>>>>>> 4ca65623b9e964e0ce2b8ebc331ab1f742e0af42
 
 let currentColor;
 let currentId;
