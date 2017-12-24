@@ -68,9 +68,11 @@ class BurgerMenu extends Component {
           <button className="ClearBtn Btn" onClick={() => clearSketch()}>
             CLEAR ALL
           </button>
+          <div className="Divider"></div>
           <button className="AddBtn Btn" onClick={this.props.onAddImageClick}>
             <img className="BtnIcon" src={add} alt="add block"/> ADD BLOCK TO ROAD
           </button>
+          <div className="Divider"></div>
           <button className="ViewBtn Btn" onClick={this.props.onViewModeClick}>
             <img className="BtnIcon" src={eye} alt="view blocks"/> VIEW PREVIOUS BLOCKS
           </button>
