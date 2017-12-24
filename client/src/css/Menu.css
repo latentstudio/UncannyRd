@@ -172,6 +172,7 @@ button:focus {outline:0;}
 }
 
 .ViewRoadBtn{
-  background: rgb(240, 240, 240);
+  background: #FFEB3B;
   border-top: 1px solid white;
+  width: 50%;
 }

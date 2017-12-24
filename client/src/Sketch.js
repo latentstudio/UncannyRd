@@ -27,6 +27,7 @@ let updateMakeStatus;
 let shouldMakeNewImage = false;
 let isDraggingAnObject;
 let clearSketch;
+let clearObjects;
 
 let currentColor;
 let currentId;
@@ -47,6 +48,7 @@ const sketch = p => {
     shouldMakeNewImage = props.shouldMakeNewImage;
     updateMakeStatus = props.updateMakeStatus;
     isDraggingAnObject = props.isDraggingAnObject;
+    clearObjects = props.clearObjects;
   };
 
   p.preload = () => {
@@ -73,7 +75,7 @@ const sketch = p => {
     // User draw
     if (p.mouseIsPressed && !isComparing && !isDraggingAnObject) {
       if (isMenuActive) {
-        if (p.mouseX < window.innerWidth - menuWidth) {
+        if (p.winMouseX < window.innerWidth - menuWidth) {
           p.ellipse(p.mouseX, p.mouseY, parseInt(brushSize));
         }
       } else {
@@ -93,6 +95,7 @@ const sketch = p => {
   clearSketch = () => {
     p.clear();
     p.copy(startImg, 0, 0, width, height, 0, 0, width, height);
+    clearObjects()
   }
 };
 
