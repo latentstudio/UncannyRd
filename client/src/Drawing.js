@@ -178,8 +178,7 @@ class Drawing extends Component {
         />
         {this.state.viewMode && (
           <button
-            id="BackToDrawingBtn"
-            className="Btn"
+            className="BackToDrawingBtn Btn"
             onClick={() =>
               this.setState({
                 viewMode: false,

@@ -72,8 +72,8 @@ canvas{
   background-position: 0 0 !important;
 }
 
-#BackToDrawingBtn {
+.BackToDrawingBtn {
   top: 120px;
-  z-index: 3;
+  z-index: 4;
   position: absolute;
 }
