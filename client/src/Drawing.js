@@ -242,7 +242,8 @@ class Drawing extends Component {
           menuWidth={menuWidth}
           currentColor={currentColor}
           currentId={currentId}
-          /></div>
+          clearObjects={() => this.setState({objects: []})}
+          />
         <p className="ImageCredits">Image drawn by a human: December 2017 © The robots from Mars</p>
       </div>
     );
