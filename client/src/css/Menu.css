@@ -175,3 +175,13 @@ button:focus {outline:0;}
   background: rgb(240, 240, 240);
   border-top: 1px solid white;
 }
+
+.ViewRoadBtn {
+  display: flex;
+  justify-content: center;
+}
+
+.BtnIcon {
+  width: 20px;
+  margin-right: 5px;
+}

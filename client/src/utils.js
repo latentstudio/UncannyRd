@@ -53,7 +53,6 @@ const shuffleArray = (array) => {
   return array;
 };
 
-
 export {
   guid,
   saveToArray,

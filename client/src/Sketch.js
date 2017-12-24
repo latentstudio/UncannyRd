@@ -2,7 +2,7 @@
 p5 Sketch
 */
 import TWEEN from '@tweenjs/tween.js';
-import { classes } from './classes';
+import { CLASSES } from './constants';
 import startImage from './img/empty.png';
 
 const importAllImages = r => {
@@ -95,8 +95,8 @@ const sketch = p => {
   }
 
   clearSketch = () => {
-    //p.clear();
-    //p.copy(startImg, 0, 0, width, height, 0, 0, width, height);
+    p.clear();
+    p.copy(startImg, 0, 0, width, height, 0, 0, width, height);
   }
 };
 

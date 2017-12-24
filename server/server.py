@@ -6,15 +6,15 @@ from collections import OrderedDict
 from flask import *
 from flask_cors import CORS
 import numpy as np
+import pathlib
+from glob import glob
 from options.test_options import TestOptions
 from data.data_loader import CreateDataLoader
 from models.models import create_model
 import util.util as util
 from data.base_dataset import get_params, get_transform
-import pathlib
-from glob import glob
 
-results_dir = pathlib.Path('./results')
+results_dir = pathlib.Path('./uncannyrd')
 results_dir.mkdir(parents=True, exist_ok=True)
 
 opt = TestOptions().parse(save=False)
@@ -33,30 +33,37 @@ app = Flask(__name__)
 CORS(app)
 
 def number_of_blocks():
-    return len(list(results_dir.glob('*')))
+    return len(list(results_dir.glob('*jpg')))
 
 
 def get_block_path(block):
-    return results_dir.joinpath(str(block) + '.jpg').absolute().name
+    return results_dir.joinpath(str(block) + '.jpg').absolute().as_posix()
 
 
-@app.route('/get_number_of_blocks')
+@app.route('/number_of_blocks')
 def get_number_of_blocks():
-    return number_of_blocks()
+    return jsonify({'size': number_of_blocks()})
 
 
-@app.route('/blocks/<block>')
+@app.route('/blocks/<block>.jpg')
 def get_block(block):
-    path = results_dir.joinpath(str(block)+'.jpg').absolute().name
-    return send_file(path, mimetype='image/jpg')
+    return send_file(get_block_path(block), mimetype='image/jpg')
 
 
 @app.route('/save', methods=['POST'])
 def save_block():
     idx = number_of_blocks()
-    file = request.files['file']
-    file.save(get_block_path(idx))
-    return 'success'
+    contents = base64.b64decode(request.data)
+    buffer = io.BytesIO()
+    buffer.write(contents)
+    # perform format check
+    try:
+        im = Image.open(buffer)
+        assert(im.size == (2048, 1024))
+        im.save(get_block_path(idx), 'JPEG')
+        return jsonify({'status': 'success', 'size': number_of_blocks()})
+    except:
+        return jsonify({'error': 'wrong format'})
 
 
 @app.route('/infer', methods=['POST'])

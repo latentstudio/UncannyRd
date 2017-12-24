@@ -1,6 +1,6 @@
 // Classes by color
 
-const classes = [
+const CLASSES = [
   { color: [0, 0, 0], label: "unlabeled", id: 0, textColor: [255,255,255], visible: false },
   { color: [255, 0, 104], label: "ego vehicle", id: 1, textColor: [255,255,255], visible: false },
   { color: [28, 255, 215], label: "rectification border", id: 2, textColor: [0,0,0], visible: false },
@@ -23,6 +23,9 @@ const classes = [
   { color: [125, 8, 33], label: "bicycle", id: 33, textColor: [255,255,255], visible: true}
 ];
 
+const BASE_URL = "http://34.207.237.232:8888";
+
 export {
-  classes
+  CLASSES,
+  BASE_URL
 }

@@ -8,14 +8,17 @@ import Draggable from 'react-draggable';
 import MdSwapHoriz from 'react-icons/lib/md/swap-horiz';
 import update from 'immutability-helper';
 import TWEEN from '@tweenjs/tween.js';
+import $ from "jquery";
 
-import { classes } from './classes';
-import sendImage from './upload';
+import { BASE_URL, CLASSES } from './constants';
+import { sendImage, saveImage } from './upload';
 import { sketch, clearSketch } from './Sketch';
 import DraggableObject from './DraggableObject';
 import Menu from './Menu';
 import NavigationWidget from './NavigationWidget';
-import startingResultImage from './img/result.jpg'
+import arrowNext from './img/arrow_next.png';
+import arrowPrev from './img/arrow_prev.png';
+import startingImg from './startImageResult';
 
 import './css/Drawing.css';
 
@@ -26,7 +29,7 @@ class Drawing extends Component {
       menuWidth: 300,
       posLeftPercentage: 10,
       posLeftPx: (8.5/100)*window.innerWidth,
-      resultImg: startingResultImage,
+      resultImg: startingImg,
       isMenuActive: true,
       isComparing: false,
       isDraggingAnObject: false,
@@ -34,13 +37,20 @@ class Drawing extends Component {
       shouldMakeNewImage: false,
       currentColor: [128, 64, 127],
       brushSize: 20,
-      currentColor: classes[5].color,
-      currentId: classes[5].id,
+      currentColor: CLASSES[5].color,
+      currentId: CLASSES[5].id,
       showLoader: false,
       sliderAnimation: undefined,
       currentBlock: 0,
-      viewMode: true
+      viewMode: false,
+      numberOfBlocks: 0
     }
+  }
+
+  componentDidMount () {
+    $.getJSON(BASE_URL + '/number_of_blocks', ({size}) => {
+      this.setState({numberOfBlocks: size})
+    })
   }
 
   handleNewDragObject = (x, y, elt, index) => {
@@ -99,8 +109,25 @@ class Drawing extends Component {
             posLeftPercentage: pos.left,
             posLeftPx: (window.innerWidth/100)*pos.left,
           }) }).start()
-      }, () => clearSketch());
+      });
     });
+  }
+
+  addImageToRoad () {
+    // TODO: check if there are changes since last synthesis
+    saveImage(this.state.resultImg, (data) => {
+      if (data.error) {
+        // TODO: show alert
+        console.log('saving failed');
+        return;
+      }
+      this.setState({
+        numberOfBlocks: data.size,
+        viewMode: true,
+        resultImg: startingImg,
+        currentBlock: data.size - 1
+      })
+    })
   }
 
   render() {
@@ -119,11 +146,35 @@ class Drawing extends Component {
       currentColor,
       currentId
     } = this.state;
+    
+    let imageToShow;
+    if (this.state.viewMode) {
+      imageToShow = BASE_URL + '/blocks/' + this.state.currentBlock + '.jpg';
+    } else {
+      imageToShow = this.state.resultImg;
+    }
 
     return (
       <div className="DrawingPage">
-        <NavigationWidget />
-        <Menu
+        <NavigationWidget 
+          currentBlock={this.state.viewMode ? this.state.currentBlock : this.state.numberOfBlocks}
+          totalBlocks={this.state.numberOfBlocks}
+          viewMode={this.state.viewMode}
+          onBlockChanged={(block) => this.setState({
+            currentBlock: block
+          })}
+          />
+        {this.state.viewMode && 
+        <button id='BackToDrawingBtn' 
+          className="Btn" 
+          onClick={() => this.setState({
+            viewMode: false, 
+            posLeftPercentage: 0,
+            posLeftPx: 0
+            })}>
+         BACK TO DRAWING
+        </button>}
+        {!this.state.viewMode && (<Menu
           currentColor={currentColor}
           brushSize={brushSize}
           changeColor={color => this.setState({currentColor: color})}
@@ -134,13 +185,17 @@ class Drawing extends Component {
           newObject={this.handleNewDragObject}
           make={this.makeNewImage}
           startDraggingObject={() => this.setState({isDraggingAnObject: true})}
-        />
+          onViewModeClick={() => this.setState({viewMode: true})}
+          onAddImageClick={() => this.addImageToRoad()}
+        />)}
         <div
           className="ResultImage"
-          style={{width: `${posLeftPercentage}%`, 
-          background: `url(${this.state.resultImg})`}}
+          style={{
+            width: `${this.state.viewMode ? 100 : posLeftPercentage}%`, 
+            background: `url(${imageToShow})`
+          }}
         />
-        <Draggable
+        {!this.state.viewMode && (<Draggable
           axis="x"
           handle=".Handle"
           position={{x: this.state.posLeftPx, y: 330}}
@@ -160,7 +215,7 @@ class Drawing extends Component {
           <div>
             <MdSwapHoriz className="Handle"/>
           </div>
-        </Draggable>
+        </Draggable>)}
         {this.state.objects.map((object, index) => { return (
           <DraggableObject
             key={object.key}
@@ -170,7 +225,7 @@ class Drawing extends Component {
             setDraggingOff={() => this.setState({isDraggingAnObject: false})}
             />
           )})};
-        <P5Wrapper 
+        <div style={{display: this.state.viewMode ? 'none' : 'block'}}><P5Wrapper 
           sketch={sketch}
           width={width}
           height={height}
@@ -187,7 +242,7 @@ class Drawing extends Component {
           menuWidth={menuWidth}
           currentColor={currentColor}
           currentId={currentId}
-          />
+          /></div>
         <p className="ImageCredits">Image drawn by a human: December 2017 © The robots from Mars</p>
       </div>
     );

@@ -7,12 +7,20 @@
   position: absolute;
 }
 
-.Back{
+.Back,.Forward{
   height: 100px;
   display: inline-block;
-  border-right: 1px solid #777777ad;
   padding: 5px;
   cursor: pointer;
+}
+
+.Back {
+  border-right: 1px solid #777777ad;
+}
+
+.Forward {
+  border-left: 1px solid #777777ad;
+  margin-left: 5px;
 }
 
 .Backarrow{
@@ -42,6 +50,13 @@
   position: absolute;
   bottom: 10px;
   font-size: 10px;
+}
+
+#location {
+  position: absolute;
+  bottom: 30px;
+  font-size: 10px;
+
 }
 
 #place{

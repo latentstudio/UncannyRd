@@ -59,3 +59,9 @@ canvas{
   background-repeat: no-repeat !important;
   background-position: 0 0 !important;
 }
+
+#BackToDrawingBtn {
+  top: 120px;
+  z-index: 2;
+  position: absolute;
+}
