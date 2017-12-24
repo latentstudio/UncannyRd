@@ -9,8 +9,7 @@ import MdBrush from 'react-icons/lib/md/brush';
 import { clearSketch } from './Sketch';
 import { CLASSES } from './constants';
 import loader from './img/loader.gif';
-import car from './img/items/i-01.png';
-import { color2css, guid } from './utils';
+import { color2css } from './utils';
 import { preDrawnImages } from './Sketch';
 import eye from './img/eye.svg';
 import add from './img/add.svg';
@@ -18,10 +17,6 @@ import add from './img/add.svg';
 import './css/Menu.css';
 
 class BurgerMenu extends Component {
-  constructor() {
-    super();
-  }
-
   render() {
     const { isMenuActive, updateStatus, brushSize, showLoader } = this.props;
     let makeBtnStyle = {
@@ -45,7 +40,7 @@ class BurgerMenu extends Component {
         {CLASSES.map(c => {
           if (c.visible) {
             const style = { background: color2css(c.color), color: color2css(c.textColor) };
-            if (c.color == this.props.currentColor) {
+            if (c.color === this.props.currentColor) {
               style.border = "1px solid white";
             }
             return <button onClick={() => this.props.changeColor(c.color)} key={c.color} style={style} className={"BrushColor"}>
@@ -74,10 +69,10 @@ class BurgerMenu extends Component {
             CLEAR ALL
           </button>
           <button className="AddBtn Btn" onClick={this.props.onAddImageClick}>
-            <img className="BtnIcon" src={add} /> ADD BLOCK TO ROAD
+            <img className="BtnIcon" src={add} alt="add block"/> ADD BLOCK TO ROAD
           </button>
           <button className="ViewBtn Btn" onClick={this.props.onViewModeClick}>
-            <img className="BtnIcon" src={eye} /> VIEW PREVIOUS BLOCKS
+            <img className="BtnIcon" src={eye} alt="view blocks"/> VIEW PREVIOUS BLOCKS
           </button>
         </div>
       </Menu>;

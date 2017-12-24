@@ -2,7 +2,6 @@
 p5 Sketch
 */
 import TWEEN from '@tweenjs/tween.js';
-import { CLASSES } from './constants';
 import startImage from './img/empty.png';
 
 const importAllImages = r => {
@@ -17,11 +16,8 @@ let pg;
 let startImg;
 let width = 0;
 let height = 0;
-let status;
 let isComparing;
 let brushSize;
-let menuWidth;
-let isMenuActive;
 let objects;
 let preloadObjects = [];
 let updateMakeStatus;
@@ -30,23 +26,17 @@ let isDraggingAnObject;
 let clearSketch;
 let mousePressed = false;
 let clearObjects;
-
 let currentColor;
-let currentId;
 
 const sketch = p => {
 
   p.myCustomRedrawAccordingToNewPropsHandler = props => {
     width = props.width;
     height = props.height;
-    status = props.status;
     isComparing = props.isComparing;
     brushSize = props.brushSize;
-    menuWidth = props.menuWidth;
-    isMenuActive = props.isMenuActive;
     objects = props.objects;
     currentColor = props.currentColor;
-    currentId = props.currentId;
     shouldMakeNewImage = props.shouldMakeNewImage;
     updateMakeStatus = props.updateMakeStatus;
     isDraggingAnObject = props.isDraggingAnObject;
@@ -79,7 +69,7 @@ const sketch = p => {
     p.noStroke();
     // User draw
     if (mousePressed && !isComparing && !isDraggingAnObject) {
-      p.ellipse(p.mouseX, p.mouseY, parseInt(brushSize));
+      p.ellipse(p.mouseX, p.mouseY, parseInt(brushSize, 10));
     }
     
     // When shouldMakeNewImage is true, copy all the <img> to the canvas

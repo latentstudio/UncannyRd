@@ -12,12 +12,12 @@ import $ from "jquery";
 
 import { BASE_URL, CLASSES } from './constants';
 import { sendImage, saveImage } from './upload';
-import { sketch, clearSketch } from './Sketch';
+import { sketch } from './Sketch';
 import DraggableObject from './DraggableObject';
 import Menu from './Menu';
 import NavigationWidget from './NavigationWidget';
-import arrowNext from './img/arrow_next.png';
-import arrowPrev from './img/arrow_prev.png';
+// import arrowNext from './img/arrow_next.png';
+// import arrowPrev from './img/arrow_prev.png';
 import startingImg from './startImageResult';
 
 import './css/Drawing.css';
@@ -26,7 +26,6 @@ class Drawing extends Component {
   constructor() {
     super();
     this.state = {
-      menuWidth: 300,
       posLeftPercentage: 10,
       posLeftPx: 8.5 / 100 * window.innerWidth,
       resultImg: startingImg,
@@ -35,7 +34,6 @@ class Drawing extends Component {
       isDraggingAnObject: false,
       objects: [],
       shouldMakeNewImage: false,
-      currentColor: [128, 64, 127],
       brushSize: 20,
       currentColor: CLASSES[5].color,
       currentId: CLASSES[5].id,
@@ -144,11 +142,9 @@ class Drawing extends Component {
     const { width, height } = this.props;
     const {
       posLeftPercentage,
-      posLeftPx,
       brushSize,
       isComparing,
       objects,
-      menuWidth,
       isMenuActive,
       shouldMakeNewImage,
       isDraggingAnObject,
@@ -278,7 +274,6 @@ class Drawing extends Component {
             }}
             shouldMakeNewImage={shouldMakeNewImage}
             brushSize={brushSize}
-            menuWidth={menuWidth}
             currentColor={currentColor}
             currentId={currentId}
             clearObjects={() => this.setState({ objects: [] })}

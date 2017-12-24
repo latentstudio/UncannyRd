@@ -1,9 +1,8 @@
 // Pix2Pix manager
 
-import { guid, saveToArray } from './utils';
+import { saveToArray } from './utils';
 import { BASE_URL, CLASSES } from './constants';
 import $ from "jquery";
-import TWEEN from '@tweenjs/tween.js';
 import pako from "pako";
 
 // Submit a new image

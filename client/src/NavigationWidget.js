@@ -12,7 +12,7 @@ import './css/NavigationWidget.css';
 class NavigationWidget extends Component {
   render() {
     return <div className="NavigationWidget">
-        {this.props.viewMode && this.props.currentBlock != 0 && <div onClick={() => this.props.onBlockChanged(this.props.currentBlock - 1)} className="Back">
+        {this.props.viewMode && this.props.currentBlock !== 0 && <div onClick={() => this.props.onBlockChanged(this.props.currentBlock - 1)} className="Back">
               <MdArrowBack className="Backarrow" />
             </div>}
         <div className="StreetInfo">
