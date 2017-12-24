@@ -1,3 +1,4 @@
+import time
 import base64
 import io
 import zlib
@@ -37,7 +38,7 @@ def number_of_blocks():
 
 
 def get_block_path(block):
-    return results_dir.joinpath(str(block) + '.jpg').absolute().as_posix()
+    return sorted(list(results_dir.glob('*jpg')))[block].as_posix()
 
 
 @app.route('/number_of_blocks')
@@ -47,7 +48,7 @@ def get_number_of_blocks():
 
 @app.route('/blocks/<block>.jpg')
 def get_block(block):
-    return send_file(get_block_path(block), mimetype='image/jpg')
+    return send_file(get_block_path(int(block)), mimetype='image/jpg')
 
 
 @app.route('/save', methods=['POST'])
@@ -60,7 +61,9 @@ def save_block():
     try:
         im = Image.open(buffer)
         assert(im.size == (2048, 1024))
-        im.save(get_block_path(idx), 'JPEG')
+        dest_path = results_dir.joinpath(
+            '%d.jpg' % int(time.time())).as_posix()
+        im.save(dest_path, 'JPEG')
         return jsonify({'status': 'success', 'size': number_of_blocks()})
     except:
         return jsonify({'error': 'wrong format'})

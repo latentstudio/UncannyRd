@@ -8,7 +8,8 @@ import pako from "pako";
 
 // Submit a new image
 const sendImage = (width, height, callback) => {
-  const imageArray = saveToArray(width, height, CLASSES);
+  const canvas = document.getElementById('hidden-canvas');
+  const imageArray = saveToArray(canvas, width, height, CLASSES);
   const deflated = pako.deflate(imageArray);
   const blob = new Blob([deflated], { type: "octet/stream" });
   const fd = new FormData();

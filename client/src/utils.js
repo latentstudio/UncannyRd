@@ -12,8 +12,8 @@ const s4 = () => Math.floor((1 + Math.random()) * 0x10000).toString(16).substrin
 const guid = () => `${s4()}${s4()}-${s4()}-${s4()}-${s4()}-${s4()}${s4()}${s4()}`;
 
 // Save to Array
-const saveToArray = (w, h, classes) => {
-  const ctx = document.querySelector('canvas').getContext('2d');
+const saveToArray = (canvas, w, h, classes) => {
+  const ctx = canvas.getContext('2d');
   const imgData = ctx.getImageData(0, 0, w, h);
   const buffer = new ArrayBuffer(w*h);
   const imageArray = new Uint8Array(buffer);

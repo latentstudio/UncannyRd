@@ -1,17 +1,18 @@
 .DraggableObject{
-  /* position: relative;
+  position: relative;
   display: inline-block;
   overflow: hidden;
   margin: 0;
   top:0px;
   left: 0px;
-  z-index: 3;
-  width: 10px;
+  z-index: 2;
+  height: 200px;
+  /* width: 10px;
   height: 10px; */
   /* padding: 10px; */
-  position: absolute;
+  /* position: absolute;
   z-index: 3;
-  height: 200px;
+  height: 200px; */
 }
 
 .DraggedElement{

@@ -13,6 +13,7 @@
     "react-dom": "^16.2.0",
     "react-draggable": "3.0.4",
     "react-icons": "2.2.7",
+    "react-modal-dialog": "^4.0.7",
     "react-p5-wrapper": "0.0.4",
     "react-scripts": "1.0.17"
   },

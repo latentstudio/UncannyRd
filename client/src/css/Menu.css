@@ -11,7 +11,7 @@
   padding: 10px;
   box-shadow: 0 10px 10px 0 rgba(10, 10, 10, 0.137), 0 10px 10px 0 rgba(0, 0, 0, 0.144);
   transition-duration: 1s;
-  z-index: 4 !important;
+  z-index: 5 !important;
 }
 
 .bm-burger-button:hover{
@@ -41,6 +41,10 @@
   font-size: 1.15em;
   overflow-y: hidden !important;
   text-align: center;
+}
+
+.bm-menu-wrap {
+    z-index: 6 !important;
 }
 
 /* Morph shape necessary with bubble or elastic */

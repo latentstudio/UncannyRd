@@ -64,51 +64,51 @@ class DraggableObject extends Component {
         border: 'none'
       }
     }
-    return (
-      <Draggable
-        handle=".DraggedElement"
-        position={{x: x, y: y}}
-        defaultPosition={{x: x, y: y}}
-        onDrag={() => this.props.setDraggingOn()}
-        onStop={this.handleDrag}
-        defaultClassName="DraggableObject">
-        <div>
-          <img
-            onDoubleClick={this.handleClick}
-            onMouseOver={() => this.props.setDraggingOn()}
-            onMouseLeave={() => this.props.setDraggingOff()}
-            draggable="false"
-            src={src}
-            alt=""
-            srcSet={src}
-            className="DraggedElement"
-          />
-        </div>
-      </Draggable>
-    );
+    // return (
+    //   <Draggable
+    //     handle=".DraggedElement"
+    //     position={{x: x, y: y}}
+    //     defaultPosition={{x: x, y: y}}
+    //     onDrag={() => this.props.setDraggingOn()}
+    //     onStop={this.handleDrag}
+    //     defaultClassName="DraggableObject">
+    //     <div>
+    //       <img
+    //         onDoubleClick={this.handleClick}
+    //         onMouseOver={() => this.props.setDraggingOn()}
+    //         onMouseLeave={() => this.props.setDraggingOff()}
+    //         draggable="false"
+    //         src={src}
+    //         alt=""
+    //         srcSet={src}
+    //         className="DraggedElement"
+    //       />
+    //     </div>
+    //   </Draggable>
+    // );
+    return  (
+      <Rnd 
+        className="DraggableObject" 
+        style={style} 
+        size={{ width: width, height: height }} 
+        position={{ x: x, y: y }} 
+        onDragStop={this.handleDrag} 
+        onDrag={() => this.props.setDraggingOn()} 
+        onResize={this.handleResize}
+        lockAspectRatio={true}>
+      <img 
+        onDoubleClick={this.handleClick} 
+        onMouseOver={() => this.props.setDraggingOn()} 
+        onMouseLeave={() => this.props.setDraggingOff()} 
+        draggable="false" 
+        src={src} 
+        alt="" 
+        srcSet={src} className="DraggedElement" />
+      </Rnd>
+    )
   }
 }
 
 export default DraggableObject;
 
 // This is not working. The resize. I'm using this: https://github.com/bokuweb/react-rnd
-// <Rnd
-// className="DraggableObject"
-// style={style}
-// size={{ width: width,  height:height }}
-// position={{ x: x, y: y }}
-// onDragStop={this.handleDrag}
-// onDrag={() => this.props.setDraggingOn()}
-// onResize={this.handleResize}
-// >
-// <img
-// onDoubleClick={this.handleClick}
-// onMouseOver={() => this.props.setDraggingOn()}
-// onMouseLeave={() => this.props.setDraggingOff()}
-// draggable="false"
-// src={src}
-// alt=""
-// srcSet={src}
-// className="DraggedElement"
-// />
-// </Rnd>

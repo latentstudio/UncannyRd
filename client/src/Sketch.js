@@ -13,6 +13,7 @@ const preDrawnImages = importAllImages(require.context('./img/items/', false, /\
 window.preDrawnImages = preDrawnImages;
 
 let canvas;
+let pg;
 let startImg;
 let width = 0;
 let height = 0;
@@ -63,7 +64,10 @@ const sketch = p => {
     canvas = p.createCanvas(width, height);
     p.noStroke();
     p.pixelDensity(1);
-    p.smooth();
+    p.noSmooth();
+    pg = p.createGraphics(width, height);
+    pg.elt.id = 'hidden-canvas';
+    pg.pixelDensity(1);
     p.background(0, 0, 0);
     p.copy(startImg, 0, 0, width, height, 0, 0, width, height);
   };
@@ -77,11 +81,23 @@ const sketch = p => {
     if (mousePressed && !isComparing && !isDraggingAnObject) {
       p.ellipse(p.mouseX, p.mouseY, parseInt(brushSize));
     }
-
+    
     // When shouldMakeNewImage is true, copy all the <img> to the canvas
     if (shouldMakeNewImage) {
+      p.loadPixels();
+      pg.copy(p, 0, 0, width, height, 0, 0, width, height);
+      const ow = canvas.elt.offsetWidth;
+      const oh = canvas.elt.offsetHeight;
       objects.forEach(object => {
-        p.image(preloadObjects[object.key], object.x, object.y, object.width, object.height);
+        const objWidth = object.width || 200;
+        const objHeight = object.height || 200;
+        pg.image(
+          preloadObjects[object.templateKey], 
+          (object.x / ow) * 2048,
+          (object.y / oh) * 1024,
+          (objWidth / ow) * 2048,
+          (objHeight / oh) * 1024
+        );
       });
       updateMakeStatus(); 
     }

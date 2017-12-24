@@ -46,6 +46,18 @@ canvas{
   max-height: 1024px !important;
 }
 
+#objects-container {
+  margin: 0px !important;
+  padding: 0px !important;
+  /* position: fixed !important;   */
+  top:0px !important;
+  left: 0px !important;
+  height: 100% !important;
+  max-width: 2048px !important;
+  max-height: 1024px !important;
+  /* z-index: 4 !important; */
+}
+
 .ResultImage{
   position: absolute !important;
   left: 0px !important;
@@ -53,7 +65,7 @@ canvas{
   max-width: 2048px !important;
   max-height: 1024px !important;
   height: 100% !important;
-  z-index: 2 !important;
+  z-index: 3 !important;
   display: block !important;
   background-size: cover !important;
   background-repeat: no-repeat !important;
@@ -62,6 +74,6 @@ canvas{
 
 #BackToDrawingBtn {
   top: 120px;
-  z-index: 2;
+  z-index: 3;
   position: absolute;
 }
