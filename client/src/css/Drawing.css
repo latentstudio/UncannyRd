@@ -44,6 +44,7 @@ canvas{
   height: 100% !important;
   max-width: 2048px !important;
   max-height: 1024px !important;
+  cursor: none;
 }
 
 #objects-container {

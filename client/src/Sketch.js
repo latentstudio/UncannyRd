@@ -13,6 +13,7 @@ window.preDrawnImages = preDrawnImages;
 
 let canvas;
 let pg;
+let dl;
 let startImg;
 let width = 0;
 let height = 0;
@@ -25,6 +26,7 @@ let shouldMakeNewImage = false;
 let isDraggingAnObject;
 let clearSketch;
 let mousePressed = false;
+let mouseOver = false;
 let clearObjects;
 let currentColor;
 
@@ -52,30 +54,44 @@ const sketch = p => {
 
   p.setup = () => {
     canvas = p.createCanvas(width, height);
+    canvas.mouseOver(() => { mouseOver = true })
+    canvas.mouseOut(() => { mouseOver = false })
     p.noStroke();
     p.pixelDensity(1);
     p.noSmooth();
+    dl = p.createGraphics(width, height);
+    dl.pixelDensity(1);
     pg = p.createGraphics(width, height);
     pg.elt.id = 'hidden-canvas';
     pg.pixelDensity(1);
     p.background(0, 0, 0);
-    p.copy(startImg, 0, 0, width, height, 0, 0, width, height);
+    dl.copy(startImg, 0, 0, width, height, 0, 0, width, height);
   };
 
   p.draw = () => {
     TWEEN.update();
 
-    p.fill(currentColor[0], currentColor[1], currentColor[2]);
-    p.noStroke();
+    p.background(0);
+    p.copy(dl, 0, 0, width, height, 0, 0, width, height);
+
+    p.noFill();
+    p.stroke(255);
+    if (mouseOver) {
+      p.ellipse(p.mouseX, p.mouseY, parseInt(brushSize, 10));
+    }
+
+    dl.fill(currentColor[0], currentColor[1], currentColor[2]);
+    dl.noStroke();
+
     // User draw
     if (mousePressed && !isComparing && !isDraggingAnObject) {
-      p.ellipse(p.mouseX, p.mouseY, parseInt(brushSize, 10));
+      dl.ellipse(p.mouseX, p.mouseY, parseInt(brushSize, 10));
     }
     
     // When shouldMakeNewImage is true, copy all the <img> to the canvas
     if (shouldMakeNewImage) {
-      p.loadPixels();
-      pg.copy(p, 0, 0, width, height, 0, 0, width, height);
+      dl.loadPixels();
+      pg.copy(dl, 0, 0, width, height, 0, 0, width, height);
       const ow = canvas.elt.offsetWidth;
       const oh = canvas.elt.offsetHeight;
       objects.forEach(object => {
