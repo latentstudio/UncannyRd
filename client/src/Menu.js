@@ -41,7 +41,7 @@ class BurgerMenu extends Component {
         </div>
         {CLASSES.map(c => {
           if (c.visible) {
-            return <BrushColor currentColor={currentColor} changeColor={() => changeColor(c.color)} key={c.color} label={c.label} textColor={c.textColor} backgroundColor={c.color}/>;
+            return <BrushColor currentColor={currentColor} changeColor={() => changeColor(c.color)} key={c.color} label={c.label} textColor={c.textColor} backgroundColor={c.color} icon={c.icon}/>;
           } else {
             return null;
           }

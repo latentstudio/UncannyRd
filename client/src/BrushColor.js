@@ -16,7 +16,7 @@ class BrushColor extends Component {
 
   render() {
     const { showName } = this.state;
-    const { changeColor, backgroundColor, label, textColor, currentColor } = this.props;
+    const { changeColor, backgroundColor, label, textColor, currentColor, icon } = this.props;
 
     const background = color2css(backgroundColor);
     const color = color2css(textColor);
@@ -46,7 +46,7 @@ class BrushColor extends Component {
           onMouseOver={() => this.setState({showName: true })}
           onMouseLeave={() => this.setState({showName: false })}
           >
-            <MdBrush />
+            {icon}
         </button>
         {showName && <span className="Label" style={textStyle}>{label}</span> }
       </div>
