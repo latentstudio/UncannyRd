@@ -4,6 +4,7 @@ Drawing App
 
 import React, { Component } from 'react';
 import Rnd from 'react-rnd';
+import MdHighlightRemove from "react-icons/lib/md/highlight-remove";
 
 import './css/DraggableObject.css';
 
@@ -73,6 +74,9 @@ class DraggableObject extends Component {
         onDrag={() => this.props.setDraggingOn()} 
         onResize={this.handleResize}
         lockAspectRatio={true}>
+      <MdHighlightRemove
+        onClick={this.props.removeObject}
+        className='RemoveDraggableObject' />
       <img 
         onDoubleClick={this.handleClick} 
         onMouseOver={() => this.props.setDraggingOn()} 

@@ -180,7 +180,7 @@ button:focus {outline:0;}
   border-top: 1px solid white;
 }
 
-.ViewRoadBtn {
+.Btn {
   display: flex;
   justify-content: center;
 }

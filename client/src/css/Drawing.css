@@ -77,3 +77,11 @@ canvas{
   z-index: 4;
   position: absolute;
 }
+
+.RemoveDraggableObject {
+  transform: scale(1.5);
+  position: absolute;
+  margin: 0.5em;
+  color: white;
+  cursor: pointer;
+}
