@@ -254,6 +254,11 @@ class Drawing extends Component {
                 setDraggingOff={() =>
                   this.setState({ isDraggingAnObject: false })
                 }
+                removeObject={() => {
+                  let objects = this.state.objects;
+                  objects.splice(objects.indexOf(object, 1));
+                  this.setState({objects});
+                }}
               />
             );
           })}

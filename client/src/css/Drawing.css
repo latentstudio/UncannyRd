@@ -44,6 +44,7 @@ canvas{
   height: 100% !important;
   max-width: 2048px !important;
   max-height: 1024px !important;
+  cursor: none;
 }
 
 #objects-container {
@@ -76,4 +77,12 @@ canvas{
   top: 120px;
   z-index: 4;
   position: absolute;
+}
+
+.RemoveDraggableObject {
+  transform: scale(1.5);
+  position: absolute;
+  margin: 0.5em;
+  color: white;
+  cursor: pointer;
 }
