@@ -6,6 +6,7 @@ import React, { Component } from 'react';
 import { slide as Menu } from 'react-burger-menu'
 import MdBrush from 'react-icons/lib/md/brush';
 
+import BrushColor from './BrushColor';
 import { clearSketch } from './Sketch';
 import { CLASSES } from './constants';
 import loader from './img/loader.gif';
@@ -17,8 +18,9 @@ import add from './img/add.svg';
 import './css/Menu.css';
 
 class BurgerMenu extends Component {
+
   render() {
-    const { isMenuActive, updateStatus, brushSize, showLoader } = this.props;
+    const { isMenuActive, updateStatus, brushSize, showLoader, changeColor, currentColor } = this.props;
     let makeBtnStyle = {
       background: 'rgba(41, 128, 41, 0.986)'
     }
@@ -39,13 +41,7 @@ class BurgerMenu extends Component {
         </div>
         {CLASSES.map(c => {
           if (c.visible) {
-            const style = { background: color2css(c.color), color: color2css(c.textColor) };
-            if (c.color === this.props.currentColor) {
-              style.border = "1px solid white";
-            }
-            return <button onClick={() => this.props.changeColor(c.color)} key={c.color} style={style} className={"BrushColor"}>
-                {c.label}
-              </button>;
+            return <BrushColor currentColor={currentColor} changeColor={() => changeColor(c.color)} key={c.color} label={c.label} textColor={c.textColor} backgroundColor={c.color}/>;
           } else {
             return null;
           }

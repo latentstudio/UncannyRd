@@ -8,7 +8,7 @@ const CLASSES = [
   { color: [255, 255, 255], label: "static", id: 4, textColor: [0,0,0], visible: false},
   { color: [128, 64, 127], label: "road", id: 7, textColor: [255,255,255], visible: true },
   { color: [243, 36, 232], label: "sidewalk", id: 8, textColor: [255,255,255], visible: true },
-  { color: [250, 165, 165], label: "parking", id: 9, textColor: [255,255,255], visible: true },
+  { color: [250, 165, 165], label: "parking", id: 9, textColor: [0,0,0], visible: true },
   { color: [70, 70, 70], label: "building", id: 11, textColor: [255,255,255], visible: true },
   { color: [189, 153, 153], label: "fence", id: 13, textColor: [255,255,255], visible: true },
   { color: [153, 153, 153], label: "pole", id: 17, textColor: [255,255,255], visible: true },
