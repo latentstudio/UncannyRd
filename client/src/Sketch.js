@@ -119,9 +119,11 @@ const sketch = p => {
   }
 
   clearSketch = () => {
+    dl.clear();
+    pg.clear();
     p.clear();
-    p.copy(startImg, 0, 0, width, height, 0, 0, width, height);
-    clearObjects()
+    dl.copy(startImg, 0, 0, width, height, 0, 0, width, height);
+    clearObjects();
   }
 };
 
