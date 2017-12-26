@@ -156,7 +156,7 @@ h5{
 
 button:focus {outline:0;}
 
-.Btn:hover{
+.Btn:hover:enabled{
   transform: scale(1.04);
 }
 

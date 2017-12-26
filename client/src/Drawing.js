@@ -12,12 +12,12 @@ import $ from "jquery";
 
 import { BASE_URL, CLASSES } from './constants';
 import { sendImage, saveImage } from './upload';
-import { sketch } from './Sketch';
+import { sketch, clearSketch } from './Sketch';
 import DraggableObject from './DraggableObject';
 import Menu from './Menu';
 import NavigationWidget from './NavigationWidget';
-// import arrowNext from './img/arrow_next.png';
-// import arrowPrev from './img/arrow_prev.png';
+import Timeline from './Timeline';
+
 import startingImg from './startImageResult';
 
 import './css/Drawing.css';
@@ -41,7 +41,8 @@ class Drawing extends Component {
       sliderAnimation: undefined,
       currentBlock: 0,
       viewMode: false,
-      numberOfBlocks: 0
+      numberOfBlocks: 0,
+      allowAdding: false
     };
   }
 
@@ -103,6 +104,7 @@ class Drawing extends Component {
     sendImage(width, height, resultImg => {
       let pos = { left: 0 };
       this.setState({
+        allowAdding: true,
         posLeft: 0,
         shouldMakeNewImage: false,
         showLoader: false,
@@ -129,12 +131,15 @@ class Drawing extends Component {
         console.log("saving failed");
         return;
       }
+      
       this.setState({
         numberOfBlocks: data.size,
+        allowAdding: false,
         viewMode: true,
         resultImg: startingImg,
         currentBlock: data.size - 1
-      });
+      }, () => clearSketch());
+      
     });
   }
 
@@ -150,7 +155,8 @@ class Drawing extends Component {
       isDraggingAnObject,
       showLoader,
       currentColor,
-      currentId
+      currentId,
+      allowAdding
     } = this.state;
 
     let imageToShow;
@@ -170,11 +176,6 @@ class Drawing extends Component {
           }
           totalBlocks={this.state.numberOfBlocks}
           viewMode={this.state.viewMode}
-          onBlockChanged={block =>
-            this.setState({
-              currentBlock: block
-            })
-          }
         />
         {this.state.viewMode && (
           <button
@@ -206,6 +207,7 @@ class Drawing extends Component {
             startDraggingObject={() =>
               this.setState({ isDraggingAnObject: true })
             }
+            allowAdding={allowAdding}
             onViewModeClick={() => this.setState({ viewMode: true })}
             onAddImageClick={() => this.addImageToRoad()}
           />
@@ -217,6 +219,16 @@ class Drawing extends Component {
             background: `url(${imageToShow})`
           }}
         />
+        {this.state.viewMode && 
+        <Timeline
+          selectBlock={block =>
+            this.setState({
+              currentBlock: block
+            })
+          }
+          totalBlocks={this.state.numberOfBlocks}
+          currentBlock={this.state.currentBlock}
+        />}
         {!this.state.viewMode && (
           <Draggable
             axis="x"
@@ -242,7 +254,7 @@ class Drawing extends Component {
           </Draggable>
         )}
         <div id="objects-container">
-          {this.state.objects.map((object, index) => {
+          {!this.state.viewMode && this.state.objects.map((object, index) => {
             return (
               <DraggableObject
                 key={object.key}
@@ -256,7 +268,7 @@ class Drawing extends Component {
                 }
                 removeObject={() => {
                   let objects = this.state.objects;
-                  objects.splice(objects.indexOf(object, 1));
+                  objects.splice(index, 1);
                   this.setState({objects});
                 }}
               />

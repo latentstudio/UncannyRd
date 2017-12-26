@@ -2,7 +2,8 @@
 p5 Sketch
 */
 import TWEEN from '@tweenjs/tween.js';
-import startImage from './img/empty.png';
+import startImage from './img/start.png';
+import frameImage from './img/frame.png';
 
 const importAllImages = r => {
   return r.keys().map(r);
@@ -15,6 +16,7 @@ let canvas;
 let pg;
 let dl;
 let startImg;
+let frameImg;
 let width = 0;
 let height = 0;
 let isComparing;
@@ -49,7 +51,8 @@ const sketch = p => {
     preDrawnImages.forEach(name => {
       preloadObjects.push(p.loadImage(name))
     });
-    startImg = p.loadImage(startImage)
+    startImg = p.loadImage(startImage);
+    frameImg = p.loadImage(frameImage);
   };
 
   p.setup = () => {
@@ -74,7 +77,7 @@ const sketch = p => {
     p.background(0);
     p.copy(dl, 0, 0, width, height, 0, 0, width, height);
 
-    p.noFill();
+    p.fill(currentColor[0], currentColor[1], currentColor[2], 100);
     p.stroke(255);
     if (mouseOver) {
       p.ellipse(p.mouseX, p.mouseY, parseInt(brushSize, 10));
@@ -120,10 +123,8 @@ const sketch = p => {
 
   clearSketch = () => {
     dl.clear();
-    pg.clear();
-    p.clear();
     dl.copy(startImg, 0, 0, width, height, 0, 0, width, height);
-    clearObjects();
+    clearObjects()
   }
 };
 
