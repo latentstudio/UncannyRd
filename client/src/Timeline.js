@@ -14,7 +14,7 @@ class Timeline extends Component {
     constructor () {
         super();
         this.state = {
-            relativePos: 0,
+            relativePos: 1,
             playing: false,
             intervalId: null,
             mouseDown: false
@@ -22,8 +22,9 @@ class Timeline extends Component {
     }
 
     mouseMove (evt) {
-        if (!this.state.mouseDown) return;
-        this.onClick(evt);
+        if (evt.nativeEvent.buttons & 1) {
+            this.onClick(evt);
+        }
     }
 
     onClick (evt) {
@@ -78,15 +79,18 @@ class Timeline extends Component {
             color: 'white',
             width: '2em'
         };
+        const timelineStyle = {
+            background: `url(${BASE_URL}/timeline?n=${this.props.totalBlocks}`,
+            backgroundRepeat: 'no-repeat',
+            backgroundSize: '100% 100%',
+        }
         
         return <div className="TimelineContainer">
             {playing ? <FaPause style={buttonStyle} onClick={this.togglePlay.bind(this)} /> : <FaPlay style={buttonStyle} onClick={this.togglePlay.bind(this)} />}
             <div className="Timeline" 
                 onClick={this.onClick.bind(this)} 
-                onMouseDown={() => this.setState({ mouseDown: true })}
-                onMouseUp={() => this.setState({ mouseDown: false })}
                 onMouseMove={this.mouseMove.bind(this)}
-                style={{ background: `url(${BASE_URL}/timeline)` }}>
+                style={timelineStyle}>
               <div className="TimelineHandle" style={{ left: relativePos * 100 + "%" }} />
             </div>
           </div>;

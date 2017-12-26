@@ -109,9 +109,6 @@ const sketch = p => {
         );
       });
       updateMakeStatus(); 
-
-      dl.copy(dl, 300, 300, width-300, height-300, 0, 0, width, height)
-      dl.copy(frameImg, 0, 0, width, height, 0, 0, width, height);
     }
   }
 

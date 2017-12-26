@@ -106,9 +106,6 @@ canvas{
   border-radius: 5px;
   border: 1px solid white;
   margin-left: 1em;
-  background-size: cover !important;
-  background-repeat: no-repeat !important;
-  background-position: 0 0 !important;
 }
 
 .TimelineHandle {
