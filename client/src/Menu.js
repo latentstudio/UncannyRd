@@ -35,6 +35,7 @@ class BurgerMenu extends Component {
     if (isMenuActive) {
       burgerIcon = false;
     }
+
     return <Menu isOpen={isMenuActive} noOverlay right customBurgerIcon={burgerIcon} onStateChange={updateStatus} bodyClassName={"Menu"}>
         <div>
           <h5>Brush Color</h5>
@@ -65,7 +66,9 @@ class BurgerMenu extends Component {
             CLEAR ALL
           </button>
           <div className="Divider"></div>
-          <button className="AddBtn Btn" onClick={this.props.onAddImageClick}>
+          <button className="AddBtn Btn" 
+            onClick={this.props.onAddImageClick} 
+            disabled={!this.props.allowAdding}>
             <img className="BtnIcon" src={add} alt="add block"/> ADD BLOCK TO ROAD
           </button>
           <div className="Divider"></div>
