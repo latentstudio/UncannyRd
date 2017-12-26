@@ -12,9 +12,9 @@ import './css/NavigationWidget.css';
 class NavigationWidget extends Component {
   render() {
     return <div className="NavigationWidget">
-        {this.props.viewMode && this.props.currentBlock !== 0 && <div onClick={() => this.props.onBlockChanged(this.props.currentBlock - 1)} className="Back">
+        {/* {this.props.viewMode && this.props.currentBlock !== 0 && <div onClick={() => this.props.onBlockChanged(this.props.currentBlock - 1)} className="Back">
               <MdArrowBack className="Backarrow" />
-            </div>}
+            </div>} */}
         <div className="StreetInfo">
           <p id="streetName">Uncanny Rd.</p>
           <MdPlace className="PlaceIcon" />
@@ -22,9 +22,9 @@ class NavigationWidget extends Component {
           {/* <p id="location">Unknown Location</p> */}
           <p id="date">December 2017</p>
         </div>
-        {this.props.viewMode && this.props.currentBlock < this.props.totalBlocks - 1 && <div onClick={() => this.props.onBlockChanged(this.props.currentBlock + 1)} className="Forward">
+        {/* {this.props.viewMode && this.props.currentBlock < this.props.totalBlocks - 1 && <div onClick={() => this.props.onBlockChanged(this.props.currentBlock + 1)} className="Forward">
               <MdArrowForward className="Backarrow" />
-            </div>}
+            </div>} */}
       </div>;
   }
 }

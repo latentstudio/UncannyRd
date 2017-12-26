@@ -41,6 +41,17 @@ def get_block_path(block):
     return sorted(list(results_dir.glob('*jpg')))[block].as_posix()
 
 
+def regenerate_thumbnail():
+    HEIGHT = 50
+    WIDTH_PER_BLOCK = 200
+    timeline = Image.new('RGB', (number_of_blocks() * WIDTH_PER_BLOCK, HEIGHT))
+    for i in range(number_of_blocks()):
+        path = get_block_path(i)
+        im = Image.open(path).resize((WIDTH_PER_BLOCK, HEIGHT))
+        timeline.paste(im, (WIDTH_PER_BLOCK * i, 0, WIDTH_PER_BLOCK * (i+1), HEIGHT))
+    timeline.save('timeline.jpg')
+    
+
 @app.route('/number_of_blocks')
 def get_number_of_blocks():
     return jsonify({'size': number_of_blocks()})
@@ -49,6 +60,11 @@ def get_number_of_blocks():
 @app.route('/blocks/<block>.jpg')
 def get_block(block):
     return send_file(get_block_path(int(block)), mimetype='image/jpg')
+
+
+@app.route('/timeline')
+def timeline_thumb():
+    return send_file('timeline.jpg', mimetype='image/jpg')
 
 
 @app.route('/save', methods=['POST'])
@@ -64,6 +80,7 @@ def save_block():
         dest_path = results_dir.joinpath(
             '%d.jpg' % int(time.time())).as_posix()
         im.save(dest_path, 'JPEG')
+        regenerate_thumbnail()
         return jsonify({'status': 'success', 'size': number_of_blocks()})
     except:
         return jsonify({'error': 'wrong format'})
@@ -89,4 +106,5 @@ def infer():
     return base64.b64encode(buffer.getvalue())
 
 if __name__ == '__main__':
+    regenerate_thumbnail()
     app.run(host='0.0.0.0', port=8888)
