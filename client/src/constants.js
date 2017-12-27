@@ -1,5 +1,5 @@
 // Classes by color
-import React, { Component } from 'react';
+import React from 'react';
 
 import FaRoad from 'react-icons/lib/fa/road';
 import FaTree from 'react-icons/lib/fa/tree';
@@ -7,7 +7,6 @@ import FaCloud from 'react-icons/lib/fa/cloud';
 import MdDirectionsWalk from 'react-icons/lib/md/directions-walk';
 import FaBicycle from 'react-icons/lib/fa/bicycle';
 import MdDirectionsBike from 'react-icons/lib/md/directions-bike';
-import MdNaturePeople from 'react-icons/lib/md/nature-people';
 import FaMotorcycle from 'react-icons/lib/fa/motorcycle';
 import MdTraffic from 'react-icons/lib/md/traffic';
 import MdDirectionsCar from 'react-icons/lib/md/directions-car';

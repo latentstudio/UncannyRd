@@ -3,8 +3,6 @@ Drawing App
 */
 
 import React, { Component } from 'react';
-import MdArrowBack from 'react-icons/lib/md/arrow-back';
-import MdArrowForward from "react-icons/lib/md/arrow-forward";
 import MdPlace from 'react-icons/lib/md/place';
 
 import './css/NavigationWidget.css';

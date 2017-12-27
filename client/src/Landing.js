@@ -3,7 +3,7 @@ Landing page
 */
 
 import React, { Component } from 'react';
-import {shuffleArray} from './utils';
+import { shuffleArray } from './utils';
 import uncanny from './videos/uncannyrd.mp4';
 import poster from './img/result.jpg';
 import './css/Landing.css';

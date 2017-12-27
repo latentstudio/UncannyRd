@@ -13,7 +13,7 @@ class App extends Component {
   constructor(){
     super();
     this.state = {
-      showLanding: false,
+      showLanding: true,
       width: 2048,
       height: 1024
     };
@@ -31,11 +31,12 @@ class App extends Component {
     return(
       <div>
         {showLanding ? 
-        <Landing select={this.handleClick} /> : 
-        <Drawing
-          onClickBack={() => this.setState({showLanding: true})}
-          width={this.state.width} 
-          height={this.state.height} /> }
+          <Landing select={this.handleClick} /> :
+          <Drawing
+            onClickBack={() => this.setState({showLanding: true})}
+            width={this.state.width} 
+            height={this.state.height} />
+        }
       </div>
     )
   }

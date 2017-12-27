@@ -3,7 +3,7 @@ p5 Sketch
 */
 import TWEEN from '@tweenjs/tween.js';
 import startImage from './img/start.png';
-import frameImage from './img/frame.png';
+import frameImage from './img/start.png'; // frame.png is missing
 
 const importAllImages = r => {
   return r.keys().map(r);

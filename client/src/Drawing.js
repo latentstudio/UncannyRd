@@ -42,7 +42,8 @@ class Drawing extends Component {
       currentBlock: 0,
       viewMode: false,
       numberOfBlocks: 0,
-      allowAdding: false
+      allowAdding: false,
+      showAbout: false
     };
   }
 
@@ -156,7 +157,8 @@ class Drawing extends Component {
       showLoader,
       currentColor,
       currentId,
-      allowAdding
+      allowAdding,
+      showAbout
     } = this.state;
 
     let imageToShow;
@@ -210,6 +212,8 @@ class Drawing extends Component {
             allowAdding={allowAdding}
             onViewModeClick={() => this.setState({ viewMode: true })}
             onAddImageClick={() => this.addImageToRoad()}
+            setAbout={s => this.setState({ showAbout: s}) }
+            showAbout={showAbout}
           />
         )}
         <div

@@ -219,3 +219,23 @@ button:focus {outline:0;}
   color:white;
   padding: 2px 4px;
 }
+
+.AboutBtn{
+  display: block;
+  outline: none;
+  position: absolute;
+  z-index: 3;
+  bottom: 80px;
+}
+
+.AboutBtn button{
+  position: absolute;
+  top: 20px;
+  left: -49px;
+  background: #232424;
+  transform: rotate(270deg);
+  padding: 6px 8px;
+  color: white;
+  border: none;
+  cursor: pointer;
+}

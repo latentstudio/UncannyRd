@@ -3,7 +3,6 @@ Drawing App
 */
 
 import React, { Component } from 'react';
-import MdBrush from 'react-icons/lib/md/brush';
 import { color2css } from './utils';
 
 class BrushColor extends Component {
