@@ -98,3 +98,15 @@ data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAJElEQVQYV2
   background: rgb(54, 54, 54);
   color:rgb(212, 212, 212);
 }
+
+.Mobile{
+  padding: 1rem 1.4rem;
+  font-size: 13px;
+  background: black;
+  color:white;
+  cursor: pointer;
+  transition-duration: 1s;
+  margin: 1em;
+  margin: auto;
+  max-width: 200px;
+}

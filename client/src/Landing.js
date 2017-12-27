@@ -6,6 +6,7 @@ import React, { Component } from 'react';
 import { shuffleArray } from './utils';
 import uncanny from './videos/uncannyrd.mp4';
 import poster from './img/result.jpg';
+import mobile from 'is-mobile';
 import './css/Landing.css';
 
 class Landing extends Component {
@@ -39,7 +40,7 @@ class Landing extends Component {
           </div>
 
           {/* <div><button className="StartBtn" onClick={() => select('view')}>View Road</button></div> */}
-          <div><button className="StartBtn" onClick={() => select('create')}>Start</button></div>
+          {mobile() ? <div className="Mobile">Please visit this site from a desktop browser</div> : <div><button className="StartBtn" onClick={() => select('create')}>Start</button></div>}
         </div>
 
         <div className="Credits">
