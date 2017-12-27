@@ -1,4 +1,4 @@
-# Uncanny Road
+# [Uncanny Road](http://uncannyroad.com)
 
 ![demo](client/src/img/demo.png)
 
