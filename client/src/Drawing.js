@@ -222,7 +222,8 @@ class Drawing extends Component {
             width: `${this.state.viewMode ? 100 : posLeftPercentage}%`,
             background: `url(${imageToShow})`
           }}
-        />
+        >
+        </div>
         {this.state.viewMode && 
         <Timeline
           selectBlock={block =>

@@ -7,7 +7,7 @@
   z-index: 20;
   text-align: center;
   animation-name: showAbout;
-  animation-duration: 4s;
+  animation-duration: 1s;
   background: #000000ab;
 }
 
@@ -49,13 +49,13 @@
   font-size: 0.8rem;
   font-weight: lighter;
   max-width: 23rem;
-  margin: 1.5rem auto;
+  margin: 0 auto;
   line-height: 1.5rem;
   padding: 1rem 0.8rem;
 }
 
 .AboutDescription p{
-  margin: 2rem 0px 0px 0px;
+  margin: 20px 0px 0px 0px;
 }
 
 .AboutDescription span{
@@ -78,4 +78,9 @@
 @keyframes showAbout {
   from {opacity: 0;}
   to {opacity: 1;}
+}
+
+span.FakeBtn {
+  font-size: 15px;
+  margin: 0 5px;
 }

@@ -33,13 +33,12 @@ class Landing extends Component {
 
         <div className="Intro">
           <div className="Title">
-            <h1 data-text="UNCANNY">UNCANNY <span>RD</span></h1>
+            <h1>UNCANNY <span>RD</span></h1>
           </div>
           <div className="Description">
           Collectively hallucinating a never-ending road using Generative Adversarial Neural Networks.
           </div>
 
-          {/* <div><button className="StartBtn" onClick={() => select('view')}>View Road</button></div> */}
           {mobile() ? <div className="Mobile">Please visit this site from a desktop browser</div> : <div><button className="StartBtn" onClick={() => select('create')}>Start</button></div>}
         </div>
 

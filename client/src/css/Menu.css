@@ -165,7 +165,7 @@ button:focus {outline:0;}
   color: white;
 }
 
-.MakeBtn span {
+.Btn span {
   font-family: 'heroic-condensed-regular', 'Helvetica', serif;
   font-size: 1rem;
   position: relative;

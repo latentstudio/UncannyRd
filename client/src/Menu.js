@@ -84,7 +84,7 @@ class BurgerMenu extends Component {
             <button className="AddBtn Btn" 
               onClick={this.props.onAddImageClick} 
               disabled={!this.props.allowAdding}>
-              <img className="BtnIcon" src={add} alt="add block"/> ADD BLOCK TO ROAD
+              <img className="BtnIcon" src={add} alt="add block"/> ADD BLOCK TO <span>RD</span>
             </button>
             <div className="Divider"></div>
             <button className="ViewBtn Btn" onClick={this.props.onViewModeClick}>

@@ -3,7 +3,6 @@ p5 Sketch
 */
 import TWEEN from '@tweenjs/tween.js';
 import startImage from './img/start.png';
-import frameImage from './img/start.png'; // frame.png is missing
 
 const importAllImages = r => {
   return r.keys().map(r);
@@ -16,7 +15,6 @@ let canvas;
 let pg;
 let dl;
 let startImg;
-let frameImg;
 let width = 0;
 let height = 0;
 let isComparing;
@@ -52,7 +50,6 @@ const sketch = p => {
       preloadObjects.push(p.loadImage(name))
     });
     startImg = p.loadImage(startImage);
-    frameImg = p.loadImage(frameImage);
   };
 
   p.setup = () => {
