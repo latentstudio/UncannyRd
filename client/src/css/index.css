@@ -44,12 +44,17 @@ a{
 }
 
 .OfflineMsg{
+  color: white;
+  font-size: 12px;
   position: absolute;
-  background: red;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  background: #c12d2d;
+  position: absolute;
   top: 0px;
   left: 0px;
   z-index: 30;
-  padding: 4px;
+  padding: 6px;
   left: 50%;
   transform: translate(-50% , 0%);
 }
