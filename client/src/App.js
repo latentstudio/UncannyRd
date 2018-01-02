@@ -30,6 +30,7 @@ class App extends Component {
     const { showLanding } = this.state;
     return(
       <div>
+        <div className='OfflineMsg'>This project is temporarily off.</div>
         {showLanding ? 
           <Landing select={this.handleClick} /> :
           <Drawing

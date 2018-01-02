@@ -42,3 +42,14 @@ a{
   border-bottom: 1px solid white;
   padding: 2px;
 }
+
+.OfflineMsg{
+  position: absolute;
+  background: red;
+  top: 0px;
+  left: 0px;
+  z-index: 30;
+  padding: 4px;
+  left: 50%;
+  transform: translate(-50% , 0%);
+}
