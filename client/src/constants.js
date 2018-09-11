@@ -39,7 +39,7 @@ const CLASSES = [
   { color: [125, 8, 33], label: "bicycle", id: 33, textColor: [255,255,255], visible: true, icon: <FaBicycle />}
 ];
 
-const BASE_URL = "http://52.3.220.135:8888";
+const BASE_URL = "http://34.229.49.224:8888";
 
 export {
   CLASSES,
